@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MailCode — Contrôlez OpenCode Où Que Vous Soyez, Par Email</title>
+  <meta name="description" content="MailCode connecte votre boîte mail à OpenCode. Contrôlez votre assistant de codage IA à distance via n'importe quel compte email. Zéro dépendance tierce.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script defer src="/assets/js/main.js"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="/fr/" class="nav-logo">
+      <img src="/assets/images/logo.svg" alt="MailCode" width="28" height="28">
+      MailCode
+    </a>
+    <button class="mobile-toggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="/fr/">Accueil</a></li>
+      <li><a href="https://github.com/zsdfbb/mailcode">GitHub</a></li>
+      <li>
+        <div class="lang-switcher">
+          <button class="lang-btn">Français ▾</button>
+          <div class="lang-dropdown">
+            <a href="/en/">English</a>
+            <a href="/zh/">中文</a>
+            <a href="/ja/">日本語</a>
+            <a href="/ko/">한국어</a>
+            <a href="/fr/" class="active">Français</a>
+            <a href="/de/">Deutsch</a>
+          </div>
+        </div>
+      </li>
+      <li><a href="#install" class="nav-cta">Commencer</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="install-block fade-up">
+      <code>git clone https://github.com/zsdfbb/mailcode.git && cd mailcode && bash install.sh</code>
+      <button class="install-copy">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copier
+      </button>
+    </div>
+    <h1 class="fade-up">Contrôlez OpenCode<br>Où Que Vous Soyez, Par Email</h1>
+    <p class="fade-up">MailCode connecte votre boîte mail à OpenCode — l'agent de codage IA open source. Envoyez des tâches, recevez des résultats et injectez des commandes via n'importe quel compte email. Zéro dépendance tierce. Une seule commande à installer.</p>
+    <div class="hero-actions fade-up">
+      <a href="#install" class="btn btn-primary">Commencer →</a>
+      <a href="https://github.com/zsdfbb/mailcode" class="btn btn-secondary">Voir sur GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how-it-works">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>Comment ça marche</h2>
+      <p>MailCode crée un pont simple entre votre boîte mail et OpenCode tournant dans tmux.</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step fade-up">
+        <div class="flow-icon">✉️</div>
+        <h3>Vous envoyez un email</h3>
+        <p>Une tâche de codage depuis n'importe quel client mail — téléphone, tablette ou ordinateur.</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step fade-up">
+        <div class="flow-icon">📡</div>
+        <h3>IMAP Listener</h3>
+        <p>MailCode surveille votre boîte en temps réel via IMAP IDLE, détectant les nouveaux messages instantanément.</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step fade-up">
+        <div class="flow-icon">⚡</div>
+        <h3>Injection tmux</h3>
+        <p>Les commandes sont injectées dans votre session OpenCode via tmux send-keys.</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step fade-up">
+        <div class="flow-icon">📬</div>
+        <h3>Notification</h3>
+        <p>Une fois la tâche terminée, vous recevez un résumé par email — répondez pour continuer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="modes">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>Deux façons de l'utiliser</h2>
+      <p>Qu'OpenCode soit déjà en cours d'exécution ou non, MailCode a la solution.</p>
+    </div>
+    <div class="modes-grid">
+      <div class="mode-card fade-up">
+        <span class="badge">Mode Réponse</span>
+        <h3>Quand OpenCode est déjà en cours</h3>
+        <p>OpenCode termine une tâche dans tmux. Le plugin pont détecte l'état inactif et vous envoie une notification par email avec un token unique de 8 caractères. Répondez simplement à cet email avec votre prochaine instruction.</p>
+        <div class="example">
+<small>Votre réponse :</small>
+#A3B7KM9Q
+Continuer l'optimisation de parse_config
+        </div>
+      </div>
+      <div class="mode-card fade-up">
+        <span class="badge">Mode Démarrage à Froid</span>
+        <h3>Quand OpenCode n'est pas lancé</h3>
+        <p>Envoyez un nouvel email avec votre session key et la description de la tâche. MailCode crée automatiquement une session tmux, lance OpenCode dans le répertoire du projet, et injecte votre commande.</p>
+        <div class="example">
+<small>Votre email (nouveau message):</small>
+key: a1b2c3d4e5f67890
+project: /path/to/your-project
+
+Refactoriser parse_config dans helper.py
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="providers">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>Fonctionne avec tous les fournisseurs</h2>
+      <p>Configurez SMTP et IMAP pour votre service de messagerie préféré.</p>
+    </div>
+    <div class="providers-scroll fade-up">
+      <div class="providers-track">
+        <div class="provider-logo">Gmail</div>
+        <div class="provider-logo">Outlook</div>
+        <div class="provider-logo">QQMail</div>
+        <div class="provider-logo">126Mail</div>
+        <div class="provider-logo">Gmail</div>
+        <div class="provider-logo">Outlook</div>
+        <div class="provider-logo">QQMail</div>
+        <div class="provider-logo">126Mail</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="features">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>Ce qui rend MailCode unique</h2>
+      <p>Conçu pour les développeurs qui ont besoin de rester en contrôle, où qu'ils soient.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-up">
+        <div class="feature-icon">📡</div>
+        <h3>IMAP IDLE Temps Réel</h3>
+        <p>Pas de latence de polling. Connexion longue IMAP IDLE pour une détection instantanée des emails.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🔐</div>
+        <h3>Authentification DKIM + SPF</h3>
+        <p>Valide l'authenticité de l'expéditeur via DNS. Mode strict optionnel pour rejeter les expéditeurs non vérifiés.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">📢</div>
+        <h3>Notifications Multi-Canaux</h3>
+        <p>Email, notifications macOS, Slack, Discord, Feishu, DingTalk, WeCom, webhooks personnalisés.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">⏱</div>
+        <h3>Tâches Planifiées</h3>
+        <p>Planification cron-like pour l'automatisation récurrente — sauvegardes nocturnes, rapports quotidiens.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">💻</div>
+        <h3>Double Interface CLI & TUI</h3>
+        <p>Interface terminal Textual pour la surveillance en direct plus un CLI puissant pour l'automatisation.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">📦</div>
+        <h3>Zéro Dépendance Tierce</h3>
+        <p>Bibliothèque standard Python pure — imaplib, smtplib, subprocess. Pas de pip install requis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="security">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>Sécurité avant tout</h2>
+      <p>Plusieurs couches de protection garantissent que vous seul contrôlez vos sessions OpenCode.</p>
+    </div>
+    <div class="security-grid">
+      <div class="security-item fade-up">
+        <div class="icon">🚫</div>
+        <h3>Liste Noire de Commandes</h3>
+        <p>Les commandes dangereuses comme <code>rm -rf</code>, <code>sudo rm</code> sont bloquées par défaut.</p>
+      </div>
+      <div class="security-item fade-up">
+        <div class="icon">✅</div>
+        <h3>Liste Blanche d'Expéditeurs</h3>
+        <p>Seules les adresses email explicitement autorisées peuvent envoyer des commandes.</p>
+      </div>
+      <div class="security-item fade-up">
+        <div class="icon">🔑</div>
+        <h3>Authentification par Clé</h3>
+        <p>Le démarrage à froid nécessite une clé de session aléatoire de 128 bits.</p>
+      </div>
+      <div class="security-item fade-up">
+        <div class="icon">⏳</div>
+        <h3>Expiration et Limites</h3>
+        <p>Les sessions expirent après 24h. Chaque session a une limite de commandes. Nettoyage automatique.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="pricing">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>Actuellement Gratuit</h2>
+      <p>Toutes les fonctionnalités incluses. Pas de limite cachée. Aucune carte bancaire requise.</p>
+    </div>
+    <div class="pricing-card fade-up">
+      <div class="pricing-badge">Gratuit — Bêta</div>
+      <div class="price">€0</div>
+      <p class="sub">Tout inclus, sans engagement.</p>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span> Relais IMAP (polling + connexion longue IDLE)</li>
+        <li><span class="check">✓</span> Mode réponse avec routage par token</li>
+        <li><span class="check">✓</span> Démarrage à froid — lancez OpenCode à distance par email</li>
+        <li><span class="check">✓</span> Comptes email illimités</li>
+        <li><span class="check">✓</span> Notifications Webhook (Slack, Discord, Feishu, etc.)</li>
+        <li><span class="check">✓</span> Tâches planifiées et déclencheurs conditionnels</li>
+        <li><span class="check">✓</span> Suite de sécurité complète</li>
+        <li><span class="check">✓</span> Interface CLI + TUI (Textual)</li>
+      </ul>
+      <a href="#install" class="btn btn-primary">Commencer →</a>
+      <p class="pricing-note">Les offres Pro et Entreprise arriveront plus tard. Les utilisateurs actuels bénéficieront de prix préférentiels.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="install">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>Installer en une commande</h2>
+      <p>Nécessite Python 3.9+, tmux et OpenCode CLI. Choisissez votre plateforme.</p>
+    </div>
+    <div class="tabs fade-up">
+      <div class="tab-nav">
+        <button class="tab-btn active" data-tab="mac">macOS</button>
+        <button class="tab-btn" data-tab="ubuntu">Ubuntu / Debian</button>
+        <button class="tab-btn" data-tab="fedora">Fedora</button>
+        <button class="tab-btn" data-tab="arch">Arch Linux</button>
+      </div>
+      <div class="tab-content active" data-tab="mac">
+        <div style="position: relative;">
+          <button class="copy-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copier
+          </button>
+          <pre><code>brew install python3 tmux
+git clone https://github.com/zsdfbb/mailcode.git
+cd mailcode
+bash install.sh</code></pre>
+        </div>
+        <p>Après installation, éditez <code>~/.config/mailcode/config.json</code> puis exécutez <code>mailcode serve --idle</code>.</p>
+      </div>
+      <div class="tab-content" data-tab="ubuntu">
+        <div style="position: relative;">
+          <button class="copy-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copier
+          </button>
+          <pre><code>apt update && apt install python3 tmux -y
+git clone https://github.com/zsdfbb/mailcode.git
+cd mailcode
+bash install.sh</code></pre>
+        </div>
+        <p>Après installation, éditez <code>~/.config/mailcode/config.json</code> puis exécutez <code>mailcode serve --idle</code>.</p>
+      </div>
+      <div class="tab-content" data-tab="fedora">
+        <div style="position: relative;">
+          <button class="copy-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copier
+          </button>
+          <pre><code>dnf install python3 tmux -y
+git clone https://github.com/zsdfbb/mailcode.git
+cd mailcode
+bash install.sh</code></pre>
+        </div>
+        <p>Après installation, éditez <code>~/.config/mailcode/config.json</code> puis exécutez <code>mailcode serve --idle</code>.</p>
+      </div>
+      <div class="tab-content" data-tab="arch">
+        <div style="position: relative;">
+          <button class="copy-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copier
+          </button>
+          <pre><code>pacman -S python tmux --noconfirm
+git clone https://github.com/zsdfbb/mailcode.git
+cd mailcode
+bash install.sh</code></pre>
+        </div>
+        <p>Après installation, éditez <code>~/.config/mailcode/config.json</code> puis exécutez <code>mailcode serve --idle</code>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="use-cases">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>Scénarios d'utilisation</h2>
+      <p>Les développeurs utilisent MailCode pour rester connectés à leur code où qu'ils soient.</p>
+    </div>
+    <div class="usecases-grid">
+      <div class="usecase-card fade-up">
+        <div class="usecase-icon">🔍</div>
+        <h3>Revue de Code à Distance</h3>
+        <p>Le pipeline CI échoue quand vous êtes absent. MailCode vous notifie par email, vous répondez avec une correction, OpenCode l'exécute — depuis votre téléphone.</p>
+      </div>
+      <div class="usecase-card fade-up">
+        <div class="usecase-icon">🔄</div>
+        <h3>Automatisation Planifiée</h3>
+        <p>Configurez des déclencheurs cron-like pour les sauvegardes nocturnes, mises à jour de dépendances ou refactoring automatisé.</p>
+      </div>
+      <div class="usecase-card fade-up">
+        <div class="usecase-icon">🚨</div>
+        <h3>Correctifs d'Urgence</h3>
+        <p>Incident de production dans les transports ? Envoyez un email avec la commande de correctif. MailCode démarre OpenCode sur votre serveur, applique le correctif et confirme le résultat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="cta">
+  <div class="container" style="text-align: center;">
+    <div class="fade-up">
+      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; margin-bottom: 12px;">Prêt à coder où que vous soyez ?</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto;">Installez MailCode en une commande et connectez votre email à OpenCode en quelques minutes.</p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="#install" class="btn btn-primary">Commencer →</a>
+        <a href="mailto:mailcode@zsdev.com" class="btn btn-secondary">Nous Contacter</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="https://github.com/zsdfbb/mailcode">GitHub</a>
+      <a href="https://github.com/zsdfbb/mailcode#readme">Documentation</a>
+      <a href="mailto:mailcode@zsdev.com">Contact</a>
+    </div>
+    <div class="footer-copy">© 2026 MailCode. Open source sous licence MIT.</div>
+  </div>
+</footer>
+
+</body>
+</html>
