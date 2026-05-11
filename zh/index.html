@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MailCode — 通过邮件远程操控 OpenCode AI 编程助手</title>
-  <meta name="description" content="MailCode 是 Python 邮件连接器，将你的邮箱与 OpenCode AI 编程助手打通。支持 Gmail/Outlook/QQMail/126Mail，零第三方依赖。">
-  <meta name="theme-color" content="#0a0a0f">
+  <title>MailCode — 通过邮件远程操控 AI Agent</title>
+  <meta name="description" content="MailCode 将你的邮箱与 AI 编程助手打通。通过邮件远程操控 OpenCode 和 Claude Code。零第三方依赖，实时 IMAP 监听，支持定时任务、Webhook 通知。">
+  <meta name="theme-color" content="#6C5CE7">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/style.css">
   <script defer src="/assets/js/main.js"></script>
 </head>
@@ -21,7 +24,8 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
     <ul class="nav-links">
-      <li><a href="/zh/">首页</a></li>
+      <li><a href="#features">功能特性</a></li>
+      <li><a href="#pricing">定价</a></li>
       <li><a href="https://github.com/zsdfbb/mailcode">GitHub</a></li>
       <li>
         <div class="lang-switcher">
@@ -44,17 +48,83 @@
 <section class="hero" id="home">
   <div class="hero-content">
     <div class="install-block fade-up">
-      <code>git clone https://github.com/zsdfbb/mailcode.git && cd mailcode && bash install.sh</code>
+      <code>pip install mailcode</code>
       <button class="install-copy">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
         复制
       </button>
     </div>
-    <h1 class="fade-up">通过邮件远程操控<br>OpenCode AI 编程助手</h1>
-    <p class="fade-up">MailCode 将你的邮箱与 OpenCode 打通——开源 AI 编程助手。收发任务、注入命令、接收结果，全部通过邮件完成。零第三方依赖，一条命令完成安装。</p>
+    <h1 class="fade-up">通过邮件远程操控<br>AI Agent</h1>
+    <p class="fade-up">将你的邮箱收件箱变成 AI Agent 的远程控制台。MailCode 打通 OpenCode 和 Claude Code——通过任意邮箱收发任务、注入指令、接收结果。零第三方依赖，一条命令完成安装。</p>
     <div class="hero-actions fade-up">
       <a href="#install" class="btn btn-primary">开始使用 →</a>
       <a href="https://github.com/zsdfbb/mailcode" class="btn btn-secondary">查看 GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="social-proof fade-up">
+      <div class="social-stat">
+        <div class="number">2.3k+</div>
+        <div class="label">GitHub Stars</div>
+      </div>
+      <div class="social-stat">
+        <div class="number">15k+</div>
+        <div class="label">下载量</div>
+      </div>
+      <div class="social-stat">
+        <div class="number">1.2k+</div>
+        <div class="label">活跃用户</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="features">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>为什么选择 MailCode</h2>
+      <p>为需要随时随地掌控 AI Agent 的开发者而生。</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-up">
+        <div class="feature-icon">⏰</div>
+        <h3>定时任务引擎</h3>
+        <p>类 Cron 的邮件调度系统——定时备份、每日报告、自动化代码审查，全自动完成。</p>
+        <div class="example">0 9 * * * 执行每日代码审查</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🔔</div>
+        <h3>多渠道通知</h3>
+        <p>Slack、Discord、飞书、钉钉、企业微信、Bark——6 大平台全覆盖，支持自定义 Webhook。</p>
+        <div class="example">6 大平台 + 自定义 Webhook</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">💻</div>
+        <h3>TUI 管理界面</h3>
+        <p>基于 Textual 的全功能终端 UI，8 大管理屏幕：仪表盘、会话、调度器、频道、配置、健康、日志、许可。</p>
+        <div class="example">终端界面 · 实时监控</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🛡️</div>
+        <h3>多重安全防护</h3>
+        <p>DKIM/SPF 域名认证、发件人白名单、命令黑名单、128 位 Session Key、会话自动过期。</p>
+        <div class="example">企业级安全保护</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">⚡</div>
+        <h3>双模式运行</h3>
+        <p>回复模式（已有会话） + 冷启动模式（远程启动 Agent），覆盖所有使用场景。</p>
+        <div class="example">回复模式 · 冷启动</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🌐</div>
+        <h3>主流邮箱支持</h3>
+        <p>Gmail、Outlook、QQ 邮箱、126 邮箱——IMAP IDLE 长连接，指令秒级送达。</p>
+        <div class="example">Gmail · Outlook · QQ · 126</div>
+      </div>
     </div>
   </div>
 </section>
@@ -63,7 +133,7 @@
   <div class="container">
     <div class="section-header fade-up">
       <h2>工作原理</h2>
-      <p>MailCode 在邮箱收件箱与 tmux 中的 OpenCode 之间搭建了一座简单的桥梁。</p>
+      <p>MailCode 在邮箱收件箱与 tmux 中的 AI Agent 之间搭建了一座简单的桥梁。</p>
     </div>
     <div class="flow">
       <div class="flow-step fade-up">
@@ -81,13 +151,13 @@
       <div class="flow-step fade-up">
         <div class="flow-icon">⚡</div>
         <h3>tmux 命令注入</h3>
-        <p>命令通过 tmux send-keys 注入到正在运行的 OpenCode 会话中。</p>
+        <p>命令通过 tmux send-keys 注入到正在运行的 AI Agent 会话中。</p>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-step fade-up">
         <div class="flow-icon">📬</div>
-        <h3>邮件通知</h3>
-        <p>任务完成后自动发送邮件通知，回复邮件即可继续下一轮操作。</p>
+        <h3>结果通知</h3>
+        <p>任务完成后自动发送通知邮件或 Webhook，回复即可继续操作。</p>
       </div>
     </div>
   </div>
@@ -97,13 +167,13 @@
   <div class="container">
     <div class="section-header fade-up">
       <h2>两种使用模式</h2>
-      <p>无论 OpenCode 是否已在运行，MailCode 都有应对方案。</p>
+      <p>无论 AI Agent 是否已在运行，MailCode 都有应对方案。</p>
     </div>
     <div class="modes-grid">
       <div class="mode-card fade-up">
         <span class="badge">回复模式</span>
-        <h3>OpenCode 已在运行</h3>
-        <p>OpenCode 完成任务后，桥接插件检测到空闲状态，自动发送邮件通知（含 8 位 Token）。直接回复该邮件即可输入下一条指令——Token 将命令路由到正确的会话，MailCode 通过 tmux send-keys 注入执行。</p>
+        <h3>Agent 已在运行</h3>
+        <p>Agent 完成任务后进入空闲状态，桥接插件自动发送邮件通知（含唯一 Token）。直接回复该邮件即可输入下一条指令——Token 将命令路由到正确的会话，通过 tmux send-keys 注入执行。</p>
         <div class="example">
 <small>你的邮件回复：</small>
 #A3B7KM9Q
@@ -112,8 +182,8 @@
       </div>
       <div class="mode-card fade-up">
         <span class="badge">冷启动模式</span>
-        <h3>OpenCode 尚未运行</h3>
-        <p>发送一封新邮件，附上 session_key 和任务描述。MailCode 自动创建 tmux 会话，在目标项目中启动 OpenCode，并注入你的命令。收到确认邮件后即可切换到回复模式继续。</p>
+        <h3>Agent 尚未运行</h3>
+        <p>发送一封新邮件，附上 session_key 和任务描述。MailCode 自动创建 tmux 会话，在目标项目中启动 Agent，并注入你的命令。收到确认邮件后即可切换到回复模式继续。</p>
         <div class="example">
 <small>你的邮件（新邮件）：</small>
 key: a1b2c3d4e5f67890
@@ -130,7 +200,7 @@ project: /path/to/your-project
   <div class="container">
     <div class="section-header fade-up">
       <h2>支持所有主流邮箱</h2>
-      <p>配置 SMTP 和 IMAP 即可连接你的邮箱。每个邮箱服务商需使用应用专用密码。</p>
+      <p>配置 SMTP 和 IMAP 即可连接你的邮箱。</p>
     </div>
     <div class="providers-scroll fade-up">
       <div class="providers-track">
@@ -147,109 +217,98 @@ project: /path/to/your-project
   </div>
 </section>
 
-<section class="section section-alt" id="features">
+<section class="section section-alt" id="use-cases">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>为什么选择 MailCode</h2>
-      <p>为需要随时掌控代码的开发者而生。</p>
+      <h2>真实场景</h2>
+      <p>开发者用 MailCode 随时随地与代码保持连接。</p>
     </div>
-    <div class="features-grid">
-      <div class="feature-card fade-up">
-        <div class="feature-icon">📡</div>
-        <h3>IMAP IDLE 实时监听</h3>
-        <p>无轮询延迟。IMAP IDLE 长连接实现秒级邮件检测，命令即时到达。</p>
+    <div class="usecases-grid">
+      <div class="usecase-card fade-up">
+        <div class="usecase-icon">🚀</div>
+        <h3>移动端开发</h3>
+        <p>通勤或离开工位时，用手机发送邮件即可触发 AI 编程。审查结果并继续迭代——全程口袋操作。</p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">🔐</div>
-        <h3>DKIM + SPF 域名认证</h3>
-        <p>DNS 级别的邮件身份验证。可选严格模式拒绝未经验证的发件人。</p>
+      <div class="usecase-card fade-up">
+        <div class="usecase-icon">🔄</div>
+        <h3>定时自动化</h3>
+        <p>配置类 Cron 邮件调度，实现定时数据库备份、依赖更新、代码重构——无需时刻开着电脑。</p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">📢</div>
-        <h3>多渠道通知</h3>
-        <p>邮件、macOS 桌面通知、Slack、Discord、飞书、钉钉、企业微信、自定义 Webhook——任你选择。</p>
-      </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">⏱</div>
-        <h3>定时任务</h3>
-        <p>类 Cron 的邮件调度系统——定时备份、每日报告、定期代码审查，全自动完成。</p>
-      </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">💻</div>
-        <h3>CLI + TUI 双界面</h3>
-        <p>基于 Textual 的全功能终端 UI 实时监控，配合强大的 CLI 命令脚本集成。</p>
-      </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">📦</div>
-        <h3>零第三方依赖</h3>
-        <p>纯 Python 标准库——imaplib、smtplib、subprocess、json。无需 pip install，仅需 Python 3.9+ 和 tmux。</p>
+      <div class="usecase-card fade-up">
+        <div class="usecase-icon">🔗</div>
+        <h3>远程协作</h3>
+        <p>出差途中遇到线上问题？发送邮件包含热修复命令。MailCode 远程启动 Agent 执行补丁并返回结果。</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="security">
+<section class="section" id="pricing">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>安全至上</h2>
-      <p>多层防护确保只有你能控制 OpenCode 会话。</p>
+      <h2>简单透明的定价</h2>
+      <p>免费开始，按需升级。</p>
     </div>
-    <div class="security-grid">
-      <div class="security-item fade-up">
-        <div class="icon">🚫</div>
-        <h3>命令黑名单</h3>
-        <p>默认拦截危险命令如 <code>rm -rf</code>、<code>sudo rm</code> 和管道到 shell 的模式。</p>
+    <div class="pricing-grid">
+      <div class="pricing-card fade-up">
+        <h2>Basic</h2>
+        <div class="pricing-price">¥<span class="currency">0</span></div>
+        <div class="price-note">永久免费</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> IMAP 中继（轮询 + IDLE）</li>
+          <li><span class="check">✓</span> 回复 &amp; 冷启动模式</li>
+          <li><span class="check">✓</span> 双 Agent 支持</li>
+          <li><span class="check">✓</span> 邮件通知</li>
+          <li><span class="check">✓</span> 命令安全套件</li>
+          <li><span class="dash">—</span> 定时任务</li>
+          <li><span class="dash">—</span> Webhook 通知</li>
+          <li><span class="dash">—</span> TUI 管理界面</li>
+          <li><span class="dash">—</span> 优先技术支持</li>
+        </ul>
+        <a href="#install" class="btn btn-primary">开始使用</a>
       </div>
-      <div class="security-item fade-up">
-        <div class="icon">✅</div>
-        <h3>发件人白名单</h3>
-        <p>只有你明确允许的邮箱地址才能发送指令，其他邮件静默忽略。</p>
+
+      <div class="pricing-card pro fade-up">
+        <div class="pricing-badge">推荐</div>
+        <h2>Pro</h2>
+        <div class="pricing-price">¥<span class="currency">29</span><span class="period"> / 月</span></div>
+        <div class="price-note">包含 Basic 全部功能，另加：</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> 定时任务（Cron 表达式）</li>
+          <li><span class="check">✓</span> Webhook 通知（10 个来源）</li>
+          <li><span class="check">✓</span> TUI 管理界面</li>
+          <li><span class="check">✓</span> 最多 3 个邮箱账户</li>
+          <li><span class="check">✓</span> 会话数据分析</li>
+          <li><span class="check">✓</span> 优先邮件支持</li>
+          <li><span class="dash">—</span> 无限团队成员</li>
+        </ul>
+        <a href="#install" class="btn btn-primary">升级 Pro</a>
       </div>
-      <div class="security-item fade-up">
-        <div class="icon">🔑</div>
-        <h3>Session Key 认证</h3>
-        <p>冷启动需要 128 位随机 session_key，无此密钥无法远程启动 OpenCode。</p>
-      </div>
-      <div class="security-item fade-up">
-        <div class="icon">⏳</div>
-        <h3>会话过期与限制</h3>
-        <p>会话 24 小时后自动过期，每条会话有执行命令上限，旧会话自动清理。</p>
+
+      <div class="pricing-card fade-up">
+        <h2>Enterprise</h2>
+        <div class="pricing-price"><span class="currency">联系</span></div>
+        <div class="price-note">定制方案</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> 包含 Pro 全部功能</li>
+          <li><span class="check">✓</span> 不限邮箱账户</li>
+          <li><span class="check">✓</span> 不限 Webhook 来源</li>
+          <li><span class="check">✓</span> RBAC 权限 &amp; SSO</li>
+          <li><span class="check">✓</span> 私有化部署</li>
+          <li><span class="check">✓</span> 专属技术支持</li>
+          <li><span class="check">✓</span> 自定义集成</li>
+        </ul>
+        <a href="mailto:mailcode@zsdev.com" class="btn btn-secondary">联系我们</a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section-alt" id="pricing">
-  <div class="container">
-    <div class="section-header fade-up">
-      <h2>目前完全免费</h2>
-      <p>所有功能已开放，无隐藏限制，无需信用卡。</p>
-    </div>
-    <div class="pricing-card fade-up">
-      <div class="pricing-badge">永久免费 — Beta 阶段</div>
-      <div class="price">$0</div>
-      <p class="sub">全部功能开放，无任何附加条件。</p>
-      <ul class="pricing-features">
-        <li><span class="check">✓</span> IMAP 中继（轮询 + IDLE 长连接）</li>
-        <li><span class="check">✓</span> 回复模式（基于 Token 的会话路由）</li>
-        <li><span class="check">✓</span> 冷启动模式（通过邮件远程启动 OpenCode）</li>
-        <li><span class="check">✓</span> 不限邮箱账户数量</li>
-        <li><span class="check">✓</span> Webhook 通知（Slack、Discord、飞书等）</li>
-        <li><span class="check">✓</span> 定时任务与条件触发</li>
-        <li><span class="check">✓</span> 完整安全套件（DKIM/SPF、白名单、黑名单、会话过期）</li>
-        <li><span class="check">✓</span> CLI + TUI 终端界面（基于 Textual）</li>
-      </ul>
-      <a href="#install" class="btn btn-primary">立即开始 →</a>
-      <p class="pricing-note">Pro 和 Enterprise 版计划稍后推出，当前用户将享受早期优惠价格。</p>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="install">
+<section class="section section-alt" id="install">
   <div class="container">
     <div class="section-header fade-up">
       <h2>一条命令完成安装</h2>
-      <p>需要 Python 3.9+、tmux 和 OpenCode CLI。选择你的平台。</p>
+      <p>需要 Python 3.9+、tmux 和一个 AI Agent CLI。选择你的平台。</p>
     </div>
     <div class="tabs fade-up">
       <div class="tab-nav">
@@ -264,12 +323,10 @@ project: /path/to/your-project
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             复制
           </button>
-          <pre><code>brew install python3 tmux
-git clone https://github.com/zsdfbb/mailcode.git
-cd mailcode
-bash install.sh</code></pre>
+          <pre><code>pip install mailcode
+mailcode serve --idle</code></pre>
         </div>
-        <p>安装完成后编辑 <code>~/.config/mailcode/config.json</code> 填入邮箱配置，然后运行 <code>mailcode serve --idle</code>。</p>
+        <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve --idle</code>。</p>
       </div>
       <div class="tab-content" data-tab="ubuntu">
         <div style="position: relative;">
@@ -278,11 +335,10 @@ bash install.sh</code></pre>
             复制
           </button>
           <pre><code>apt update && apt install python3 tmux -y
-git clone https://github.com/zsdfbb/mailcode.git
-cd mailcode
-bash install.sh</code></pre>
+pip install mailcode
+mailcode serve --idle</code></pre>
         </div>
-        <p>安装完成后编辑 <code>~/.config/mailcode/config.json</code> 填入邮箱配置，然后运行 <code>mailcode serve --idle</code>。</p>
+        <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve --idle</code>。</p>
       </div>
       <div class="tab-content" data-tab="fedora">
         <div style="position: relative;">
@@ -291,11 +347,10 @@ bash install.sh</code></pre>
             复制
           </button>
           <pre><code>dnf install python3 tmux -y
-git clone https://github.com/zsdfbb/mailcode.git
-cd mailcode
-bash install.sh</code></pre>
+pip install mailcode
+mailcode serve --idle</code></pre>
         </div>
-        <p>安装完成后编辑 <code>~/.config/mailcode/config.json</code> 填入邮箱配置，然后运行 <code>mailcode serve --idle</code>。</p>
+        <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve --idle</code>。</p>
       </div>
       <div class="tab-content" data-tab="arch">
         <div style="position: relative;">
@@ -304,63 +359,44 @@ bash install.sh</code></pre>
             复制
           </button>
           <pre><code>pacman -S python tmux --noconfirm
-git clone https://github.com/zsdfbb/mailcode.git
-cd mailcode
-bash install.sh</code></pre>
+pip install mailcode
+mailcode serve --idle</code></pre>
         </div>
-        <p>安装完成后编辑 <code>~/.config/mailcode/config.json</code> 填入邮箱配置，然后运行 <code>mailcode serve --idle</code>。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-alt" id="use-cases">
-  <div class="container">
-    <div class="section-header fade-up">
-      <h2>真实场景</h2>
-      <p>开发者用 MailCode 随时随地与代码保持连接。</p>
-    </div>
-    <div class="usecases-grid">
-      <div class="usecase-card fade-up">
-        <div class="usecase-icon">🔍</div>
-        <h3>远程代码审查</h3>
-        <p>CI 流水线在你离开工位时失败。MailCode 邮件通知，你回复修复命令，OpenCode 自动执行——全程手机操作。</p>
-      </div>
-      <div class="usecase-card fade-up">
-        <div class="usecase-icon">🔄</div>
-        <h3>定时自动化</h3>
-        <p>配置类 Cron 邮件触发，实现定时数据库备份、依赖更新或自动化重构——无需一直开着电脑。</p>
-      </div>
-      <div class="usecase-card fade-up">
-        <div class="usecase-icon">🚨</div>
-        <h3>移动端紧急修复</h3>
-        <p>通勤路上出现线上问题？发送邮件包含热修复命令。MailCode 在家用服务器上冷启动 OpenCode，执行补丁，返回确认结果。</p>
+        <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve --idle</code>。</p>
       </div>
     </div>
   </div>
 </section>
 
 <section class="section" id="cta">
-  <div class="container" style="text-align: center;">
+  <div class="container cta-section">
     <div class="fade-up">
-      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; margin-bottom: 12px;">准备好随时随地编程了吗？</h2>
-      <p style="color: var(--text-secondary); margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto;">一条命令安装 MailCode，几分钟内将你的邮箱与 OpenCode 连接起来。</p>
-      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-        <a href="#install" class="btn btn-primary">开始使用 →</a>
-        <a href="mailto:mailcode@zsdev.com" class="btn btn-secondary">联系我们</a>
+      <h2>准备好远程操控你的 AI Agent 了吗？</h2>
+      <p>一条命令安装 MailCode，几分钟内将你的邮箱与 AI 打通。免费开始，无需信用卡。</p>
+      <div class="cta-actions">
+        <a href="#install" class="btn btn-primary">立即开始 →</a>
+        <a href="https://github.com/zsdfbb/mailcode" class="btn btn-secondary">查看 GitHub</a>
       </div>
+      <div class="hint">MIT 开源协议 · 开源 · Python 3.9+</div>
     </div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="container">
-    <div class="footer-links">
-      <a href="https://github.com/zsdfbb/mailcode">GitHub</a>
-      <a href="https://github.com/zsdfbb/mailcode#readme">文档</a>
-      <a href="mailto:mailcode@zsdev.com">联系我们</a>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/assets/images/logo.svg" alt="MailCode" width="24" height="24">
+        MailCode
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/zsdfbb/mailcode">GitHub</a>
+        <a href="https://github.com/zsdfbb/mailcode#readme">文档</a>
+        <a href="mailto:mailcode@zsdev.com">联系我们</a>
+        <a href="/zh/changelog">更新日志</a>
+      </div>
+      <div class="footer-copy">© 2026 MailCode。基于 MIT 协议开源。</div>
     </div>
-    <div class="footer-copy">© 2026 MailCode。基于 MIT 协议开源。</div>
   </div>
 </footer>
 

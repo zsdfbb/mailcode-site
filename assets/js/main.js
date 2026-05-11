@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
   initTabs()
   initLangSwitcher()
   initMobileMenu()
+  initActiveNav()
 })
 
-/* Scroll animations via IntersectionObserver */
 function initScrollAnimations() {
   const els = document.querySelectorAll('.fade-up')
   if (!els.length) return
@@ -24,11 +24,11 @@ function initScrollAnimations() {
   els.forEach((el) => observer.observe(el))
 }
 
-/* Copy buttons */
 function initCopyButtons() {
   document.querySelectorAll('.install-copy, .copy-btn').forEach((btn) => {
     btn.addEventListener('click', function () {
-      const code = this.parentElement.querySelector('code, pre')
+      const pre = this.closest('div')
+      const code = pre ? pre.querySelector('code, pre code, pre') : null
       if (!code) return
       const text = code.textContent.trim()
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -60,13 +60,10 @@ function fallbackCopy(text, el) {
   try {
     document.execCommand('copy')
     showCopied(el)
-  } catch (e) {
-    // silently fail
-  }
+  } catch (e) {}
   document.body.removeChild(ta)
 }
 
-/* Installation tabs */
 function initTabs() {
   document.querySelectorAll('.tab-btn').forEach((btn) => {
     btn.addEventListener('click', function () {
@@ -81,7 +78,6 @@ function initTabs() {
   })
 }
 
-/* Language switcher */
 function initLangSwitcher() {
   const btn = document.querySelector('.lang-btn')
   const dropdown = document.querySelector('.lang-dropdown')
@@ -101,7 +97,6 @@ function initLangSwitcher() {
   })
 }
 
-/* Mobile menu */
 function initMobileMenu() {
   const toggle = document.querySelector('.mobile-toggle')
   const navLinks = document.querySelector('.nav-links')
@@ -116,4 +111,32 @@ function initMobileMenu() {
       navLinks.classList.remove('open')
     })
   })
+
+  document.addEventListener('scroll', function () {
+    navLinks.classList.remove('open')
+  })
+}
+
+function initActiveNav() {
+  const sections = document.querySelectorAll('section[id]')
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]')
+  if (!sections.length || !navLinks.length) return
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => {
+            link.style.color = ''
+            if (link.getAttribute('href') === '#' + entry.target.id) {
+              link.style.color = 'var(--color-brand)'
+            }
+          })
+        }
+      })
+    },
+    { threshold: 0.3, rootMargin: '-64px 0px 0px 0px' }
+  )
+
+  sections.forEach((section) => observer.observe(section))
 }

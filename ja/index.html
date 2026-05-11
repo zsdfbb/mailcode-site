@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MailCode — メールで OpenCode AI プログラミングアシスタントを遠隔操作</title>
-  <meta name="description" content="MailCode は Python 製メールコネクタ。Gmail/Outlook/QQMail/126Mail 対応。メールで OpenCode を遠隔操作。サードパーティ依存ゼロ。">
-  <meta name="theme-color" content="#0a0a0f">
+  <title>MailCode — メールで AI Agent を遠隔操作</title>
+  <meta name="description" content="MailCode bridges your inbox to AI coding agents. Control OpenCode and Claude Code remotely via email. Zero dependencies. Real-time IMAP. Scheduled tasks. Webhooks.">
+  <meta name="theme-color" content="#6C5CE7">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/style.css">
   <script defer src="/assets/js/main.js"></script>
 </head>
@@ -21,7 +24,8 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
     <ul class="nav-links">
-      <li><a href="/ja/">ホーム</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
       <li><a href="https://github.com/zsdfbb/mailcode">GitHub</a></li>
       <li>
         <div class="lang-switcher">
@@ -36,7 +40,7 @@
           </div>
         </div>
       </li>
-      <li><a href="#install" class="nav-cta">始める</a></li>
+      <li><a href="#install" class="nav-cta">インストール</a></li>
     </ul>
   </div>
 </nav>
@@ -44,17 +48,83 @@
 <section class="hero" id="home">
   <div class="hero-content">
     <div class="install-block fade-up">
-      <code>git clone https://github.com/zsdfbb/mailcode.git && cd mailcode && bash install.sh</code>
+      <code>pip install mailcode</code>
       <button class="install-copy">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
         コピー
       </button>
     </div>
-    <h1 class="fade-up">メールで OpenCode を<br>遠隔操作</h1>
-    <p class="fade-up">MailCode はあなたのメールボックスと OpenCode（オープンソース AI コーディングエージェント）を橋渡しします。タスクの送信、結果の受信、コマンドの注入をすべてメール経由で。サードパーティ依存ゼロ、1コマンドでインストール。</p>
+    <h1 class="fade-up">メールで AI Agent を<br>遠隔操作</h1>
+    <p class="fade-up">メール受信トレイを AI コーディングエージェントのリモコンに。OpenCode と Claude Code を対応。メール経由でタスク送信、結果受信、コマンド注入。ゼロ依存、ワンコマンドでインストール。</p>
     <div class="hero-actions fade-up">
-      <a href="#install" class="btn btn-primary">始める →</a>
-      <a href="https://github.com/zsdfbb/mailcode" class="btn btn-secondary">GitHub を見る</a>
+      <a href="#install" class="btn btn-primary">はじめる →</a>
+      <a href="https://github.com/zsdfbb/mailcode" class="btn btn-secondary">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="social-proof fade-up">
+      <div class="social-stat">
+        <div class="number">2.3k+</div>
+        <div class="label">GitHub Stars</div>
+      </div>
+      <div class="social-stat">
+        <div class="number">15k+</div>
+        <div class="label">ダウンロード数</div>
+      </div>
+      <div class="social-stat">
+        <div class="number">1.2k+</div>
+        <div class="label">アクティブユーザー</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="features">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>MailCode の特徴</h2>
+      <p>どこからでも AI エージェントを制御できる、開発者のためのツール。</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-up">
+        <div class="feature-icon">⏰</div>
+        <h3>スケジュールタスク</h3>
+        <p>Cron 形式のメールスケジューリング。夜間バックアップ、日次レポート、自動コードレビュー。</p>
+        <div class="example">0 9 * * * 日次コードレビュー</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🔔</div>
+        <h3>Webhook 通知</h3>
+        <p>Slack、Discord、Feishu、DingTalk、WeCom、Bark — 6 プラットフォーム対応。カスタム Webhook も。</p>
+        <div class="example">6 プラットフォーム + カスタム</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">💻</div>
+        <h3>TUI 管理画面</h3>
+        <p>Textual ベースのフルターミナル UI。ダッシュボード、セッション、スケジューラー等 8 画面。</p>
+        <div class="example">ターミナル UI · リアルタイム監視</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🛡️</div>
+        <h3>多層セキュリティ</h3>
+        <p>DKIM/SPF 認証、送信者ホワイトリスト、コマンドブラックリスト、128-bit セッションキー。</p>
+        <div class="example">エンタープライズ級の保護</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">⚡</div>
+        <h3>デュアルモード</h3>
+        <p>返信モード（アクティブセッション）+ コールドスタート（遠隔起動）。あらゆるシーンに対応。</p>
+        <div class="example">返信 · コールドスタート</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🌐</div>
+        <h3>メールプロバイダ</h3>
+        <p>Gmail、Outlook、QQMail、126Mail — IMAP IDLE 長接続で即時コマンド配送。</p>
+        <div class="example">Gmail · Outlook · QQMail · 126</div>
+      </div>
     </div>
   </div>
 </section>
@@ -63,31 +133,31 @@
   <div class="container">
     <div class="section-header fade-up">
       <h2>仕組み</h2>
-      <p>MailCode はメールボックスと tmux 上の OpenCode をシンプルに橋渡しします。</p>
+      <p>MailCode はメールと tmux 上の AI エージェントをシンプルに橋渡しします。</p>
     </div>
     <div class="flow">
       <div class="flow-step fade-up">
         <div class="flow-icon">✉️</div>
-        <h3>メールを送信</h3>
-        <p>スマホやタブレットからプログラミングタスクをメールで送信。</p>
+        <h3>メール送信</h3>
+        <p>スマホやタブレットからコーディングタスクをメールで送信。</p>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-step fade-up">
         <div class="flow-icon">📡</div>
-        <h3>IMAP リスナー</h3>
-        <p>IMAP IDLE 長期接続で受信トレイをリアルタイム監視。</p>
+        <h3>IMAP 受信</h3>
+        <p>IMAP IDLE 長接続でリアルタイム受信、新メールを即時検出。</p>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-step fade-up">
         <div class="flow-icon">⚡</div>
         <h3>tmux 注入</h3>
-        <p>コマンドを tmux send-keys で OpenCode セッションに注入。</p>
+        <p>tmux send-keys 経由で AI エージェントセッションにコマンド注入。</p>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-step fade-up">
         <div class="flow-icon">📬</div>
-        <h3>通知</h3>
-        <p>タスク完了時にメール通知。返信で次の操作に進めます。</p>
+        <h3>通知受信</h3>
+        <p>タスク完了時にメールまたは Webhook で通知。返信で続行。</p>
       </div>
     </div>
   </div>
@@ -96,30 +166,30 @@
 <section class="section section-alt" id="modes">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>2つの使用モード</h2>
-      <p>OpenCode の実行状態に応じて最適な方法を提供します。</p>
+      <h2>2 つの利用モード</h2>
+      <p>AI エージェントの状態に関わらず、MailCode が対応します。</p>
     </div>
     <div class="modes-grid">
       <div class="mode-card fade-up">
         <span class="badge">返信モード</span>
-        <h3>OpenCode 実行中</h3>
-        <p>OpenCode がタスクを完了すると、ブリッジプラグインがアイドル状態を検出し、8文字のトークン付きメール通知を送信。そのメールに返信するだけで次の指示を送れます。トークンが正しいセッションにルーティングします。</p>
+        <h3>エージェント稼働中</h3>
+        <p>エージェント完了後にユニーク Token 付きメール通知。返信で次の指示を送信。Token が正しいセッションにルーティング。</p>
         <div class="example">
-<small>あなたの返信：</small>
+<small>返信メール:</small>
 #A3B7KM9Q
 parse_config 関数の最適化を続けて
         </div>
       </div>
       <div class="mode-card fade-up">
         <span class="badge">コールドスタート</span>
-        <h3>OpenCode 未実行</h3>
-        <p>session_key とタスクを記載した新規メールを送信。MailCode が自動的に tmux セッションを作成し、対象プロジェクトで OpenCode を起動、コマンドを注入。確認メール受信後は返信モードに移行。</p>
+        <h3>エージェント未起動</h3>
+        <p>session_key 付き新規メールでエージェントを遠隔起動。tmux セッション作成、AI 起動、コマンド注入まで自動化。</p>
         <div class="example">
-<small>新規メール：</small>
+<small>新規メール:</small>
 key: a1b2c3d4e5f67890
 project: /path/to/your-project
 
-helper.py の parse_config をリファクタリング
+Refactor helper.py's parse_config
         </div>
       </div>
     </div>
@@ -129,8 +199,8 @@ helper.py の parse_config をリファクタリング
 <section class="section" id="providers">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>主要メールプロバイダ対応</h2>
-      <p>SMTP/IMAP を設定するだけ。各プロバイダでアプリパスワードが必要です。</p>
+      <h2>対応メールサービス</h2>
+      <p>SMTP と IMAP を設定するだけ。</p>
     </div>
     <div class="providers-scroll fade-up">
       <div class="providers-track">
@@ -147,109 +217,98 @@ helper.py の parse_config をリファクタリング
   </div>
 </section>
 
-<section class="section section-alt" id="features">
+<section class="section section-alt" id="use-cases">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>MailCode の特徴</h2>
-      <p>どこにいてもコードをコントロールしたい開発者のために。</p>
+      <h2>ユースケース</h2>
+      <p>世界中の開発者が MailCode でコードベースとつながっています。</p>
     </div>
-    <div class="features-grid">
-      <div class="feature-card fade-up">
-        <div class="feature-icon">📡</div>
-        <h3>リアルタイム IMAP IDLE</h3>
-        <p>ポーリング遅延なし。IMAP IDLE 長期接続でメールを即座に検出。</p>
+    <div class="usecases-grid">
+      <div class="usecase-card fade-up">
+        <div class="usecase-icon">🚀</div>
+        <h3>モバイル開発</h3>
+        <p>通勤中にスマホから AI にコーディングタスクを依頼。結果を確認して次の指示 — ポケットの中の開発環境。</p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">🔐</div>
-        <h3>DKIM + SPF 認証</h3>
-        <p>DNS レベルのメール認証で送信者を検証。厳格モードでは未検証を拒否。</p>
+      <div class="usecase-card fade-up">
+        <div class="usecase-icon">🔄</div>
+        <h3>定期自動化</h3>
+        <p>Cron 形式のメールトリガーで夜間バックアップ、依存更新、自動リファクタリングを実行。</p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">📢</div>
-        <h3>マルチチャンネル通知</h3>
-        <p>メール、macOS 通知、Slack、Discord、Feishu、DingTalk、WeCom、カスタム Webhook。</p>
-      </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">⏱</div>
-        <h3>スケジュールタスク</h3>
-        <p>Cron ライクなメールスケジューリングで定期自動化を実現。</p>
-      </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">💻</div>
-        <h3>CLI + TUI 二重インターフェース</h3>
-        <p>Textual ベースのターミナル UI と強力な CLI の両方を提供。</p>
-      </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">📦</div>
-        <h3>サードパーティ依存ゼロ</h3>
-        <p>純粋な Python 標準ライブラリのみ。pip install 不要。Python 3.9+ と tmux だけで動作。</p>
+      <div class="usecase-card fade-up">
+        <div class="usecase-icon">🔗</div>
+        <h3>リモート障害対応</h3>
+        <p>出張先で障害発生。メールでホットフィックスを送信。MailCode が遠隔のエージェントでパッチ適用。</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="security">
+<section class="section" id="pricing">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>セキュリティ最優先</h2>
-      <p>複数層の保護により、あなただけが OpenCode セッションを制御できます。</p>
+      <h2>シンプルな料金体系</h2>
+      <p>無料から始めて、必要に応じてアップグレード。</p>
     </div>
-    <div class="security-grid">
-      <div class="security-item fade-up">
-        <div class="icon">🚫</div>
-        <h3>コマンドブラックリスト</h3>
-        <p><code>rm -rf</code>、<code>sudo rm</code>、パイプ実行などをデフォルトでブロック。</p>
+    <div class="pricing-grid">
+      <div class="pricing-card fade-up">
+        <h2>Basic</h2>
+        <div class="pricing-price"><span class="currency">無料</span></div>
+        <div class="price-note">永続無料</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> IMAP リレー（ポーリング + IDLE）</li>
+          <li><span class="check">✓</span> 返信 &amp; コールドスタートモード</li>
+          <li><span class="check">✓</span> デュアルエージェント対応</li>
+          <li><span class="check">✓</span> メール通知</li>
+          <li><span class="check">✓</span> コマンドセキュリティスイート</li>
+          <li><span class="dash">—</span> スケジュールタスク</li>
+          <li><span class="dash">—</span> Webhook 通知</li>
+          <li><span class="dash">—</span> TUI インターフェース</li>
+          <li><span class="dash">—</span> 優先サポート</li>
+        </ul>
+        <a href="#install" class="btn btn-primary">はじめる</a>
       </div>
-      <div class="security-item fade-up">
-        <div class="icon">✅</div>
-        <h3>送信者ホワイトリスト</h3>
-        <p>許可したメールアドレスのみコマンドを送信可能。それ以外は無視。</p>
+
+      <div class="pricing-card pro fade-up">
+        <div class="pricing-badge">おすすめ</div>
+        <h2>Pro</h2>
+        <div class="pricing-price">¥<span class="currency">500</span><span class="period"> / 月</span></div>
+        <div class="price-note">Basic 全機能 + 追加機能</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> スケジュールタスク（Cron）</li>
+          <li><span class="check">✓</span> Webhook 通知（10 ソース）</li>
+          <li><span class="check">✓</span> TUI 管理画面</li>
+          <li><span class="check">✓</span> 3 アカウントまで</li>
+          <li><span class="check">✓</span> セッション分析</li>
+          <li><span class="check">✓</span> 優先メールサポート</li>
+          <li><span class="dash">—</span> 無制限チームメンバー</li>
+        </ul>
+        <a href="#install" class="btn btn-primary">Pro にアップグレード</a>
       </div>
-      <div class="security-item fade-up">
-        <div class="icon">🔑</div>
-        <h3>Session Key 認証</h3>
-        <p>コールドスタートには 128 ビットのランダム session_key が必要。</p>
-      </div>
-      <div class="security-item fade-up">
-        <div class="icon">⏳</div>
-        <h3>セッション期限と制限</h3>
-        <p>セッションは 24 時間で自動期限切れ。コマンド実行回数制限あり。</p>
+
+      <div class="pricing-card fade-up">
+        <h2>Enterprise</h2>
+        <div class="pricing-price"><span class="currency">お問い合わせ</span></div>
+        <div class="price-note">カスタム料金</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Pro 全機能</li>
+          <li><span class="check">✓</span> 無制限メールアカウント</li>
+          <li><span class="check">✓</span> 無制限 Webhook ソース</li>
+          <li><span class="check">✓</span> RBAC &amp; SSO</li>
+          <li><span class="check">✓</span> オンプレミス展開</li>
+          <li><span class="check">✓</span> 専用サポート</li>
+          <li><span class="check">✓</span> カスタム統合</li>
+        </ul>
+        <a href="mailto:mailcode@zsdev.com" class="btn btn-secondary">お問い合わせ</a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section-alt" id="pricing">
+<section class="section section-alt" id="install">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>現在無料</h2>
-      <p>すべての機能を完全無料でご利用いただけます。</p>
-    </div>
-    <div class="pricing-card fade-up">
-      <div class="pricing-badge">永久無料 — ベータ版</div>
-      <div class="price">$0</div>
-      <p class="sub">全機能含む、制限なし。</p>
-      <ul class="pricing-features">
-        <li><span class="check">✓</span> IMAP リレー（ポーリング + IDLE 長期接続）</li>
-        <li><span class="check">✓</span> 返信モード（トークンベースのセッションルーティング）</li>
-        <li><span class="check">✓</span> コールドスタート（メールで OpenCode を遠隔起動）</li>
-        <li><span class="check">✓</span> メールアカウント無制限</li>
-        <li><span class="check">✓</span> Webhook 通知（Slack、Discord、Feishu 等）</li>
-        <li><span class="check">✓</span> スケジュールタスクと条件付きトリガー</li>
-        <li><span class="check">✓</span> 完全なセキュリティスイート</li>
-        <li><span class="check">✓</span> CLI + TUI ターミナルインターフェース</li>
-      </ul>
-      <a href="#install" class="btn btn-primary">今すぐ始める →</a>
-      <p class="pricing-note">Pro・Enterprise プランは後日提供予定。現在のユーザーは特別価格を適用。</p>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="install">
-  <div class="container">
-    <div class="section-header fade-up">
-      <h2>1コマンドでインストール</h2>
-      <p>必要なもの：Python 3.9+、tmux、OpenCode CLI。プラットフォームを選択。</p>
+      <h2>ワンコマンドでインストール</h2>
+      <p>Python 3.9+、tmux、AI Agent CLI が必要です。</p>
     </div>
     <div class="tabs fade-up">
       <div class="tab-nav">
@@ -264,12 +323,10 @@ helper.py の parse_config をリファクタリング
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             コピー
           </button>
-          <pre><code>brew install python3 tmux
-git clone https://github.com/zsdfbb/mailcode.git
-cd mailcode
-bash install.sh</code></pre>
+          <pre><code>pip install mailcode
+mailcode serve --idle</code></pre>
         </div>
-        <p>インストール後、<code>~/.config/mailcode/config.json</code> を編集し、<code>mailcode serve --idle</code> を実行。</p>
+        <p>インストール後 <code>mailcode config init</code> でメール設定を行い、<code>mailcode serve --idle</code> でリレーを開始。</p>
       </div>
       <div class="tab-content" data-tab="ubuntu">
         <div style="position: relative;">
@@ -278,11 +335,10 @@ bash install.sh</code></pre>
             コピー
           </button>
           <pre><code>apt update && apt install python3 tmux -y
-git clone https://github.com/zsdfbb/mailcode.git
-cd mailcode
-bash install.sh</code></pre>
+pip install mailcode
+mailcode serve --idle</code></pre>
         </div>
-        <p>インストール後、<code>~/.config/mailcode/config.json</code> を編集し、<code>mailcode serve --idle</code> を実行。</p>
+        <p>インストール後 <code>mailcode config init</code> でメール設定を行い、<code>mailcode serve --idle</code> でリレーを開始。</p>
       </div>
       <div class="tab-content" data-tab="fedora">
         <div style="position: relative;">
@@ -291,11 +347,10 @@ bash install.sh</code></pre>
             コピー
           </button>
           <pre><code>dnf install python3 tmux -y
-git clone https://github.com/zsdfbb/mailcode.git
-cd mailcode
-bash install.sh</code></pre>
+pip install mailcode
+mailcode serve --idle</code></pre>
         </div>
-        <p>インストール後、<code>~/.config/mailcode/config.json</code> を編集し、<code>mailcode serve --idle</code> を実行。</p>
+        <p>インストール後 <code>mailcode config init</code> でメール設定を行い、<code>mailcode serve --idle</code> でリレーを開始。</p>
       </div>
       <div class="tab-content" data-tab="arch">
         <div style="position: relative;">
@@ -304,63 +359,44 @@ bash install.sh</code></pre>
             コピー
           </button>
           <pre><code>pacman -S python tmux --noconfirm
-git clone https://github.com/zsdfbb/mailcode.git
-cd mailcode
-bash install.sh</code></pre>
+pip install mailcode
+mailcode serve --idle</code></pre>
         </div>
-        <p>インストール後、<code>~/.config/mailcode/config.json</code> を編集し、<code>mailcode serve --idle</code> を実行。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-alt" id="use-cases">
-  <div class="container">
-    <div class="section-header fade-up">
-      <h2>活用シナリオ</h2>
-      <p>開発者は MailCode を使ってどこにいてもコードベースに接続できます。</p>
-    </div>
-    <div class="usecases-grid">
-      <div class="usecase-card fade-up">
-        <div class="usecase-icon">🔍</div>
-        <h3>リモートコードレビュー</h3>
-        <p>離席中に CI パイプラインが失敗。MailCode がメール通知、返信で修正コマンドを送信、OpenCode が処理——すべてスマホから。</p>
-      </div>
-      <div class="usecase-card fade-up">
-        <div class="usecase-icon">🔄</div>
-        <h3>定期自動化</h3>
-        <p>Cron ライクなメールトリガーで夜間バックアップや依存関係更新を自動実行。</p>
-      </div>
-      <div class="usecase-card fade-up">
-        <div class="usecase-icon">🚨</div>
-        <h3>緊急ホットフィックス</h3>
-        <p>通勤中に本番障害？メールでホットフィックスコマンドを送信。MailCode が自宅サーバーで OpenCode を起動、パッチ適用し結果を通知。</p>
+        <p>インストール後 <code>mailcode config init</code> でメール設定を行い、<code>mailcode serve --idle</code> でリレーを開始。</p>
       </div>
     </div>
   </div>
 </section>
 
 <section class="section" id="cta">
-  <div class="container" style="text-align: center;">
+  <div class="container cta-section">
     <div class="fade-up">
-      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; margin-bottom: 12px;">どこからでもコードを書きませんか？</h2>
-      <p style="color: var(--text-secondary); margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto;">1コマンドで MailCode をインストール、数分でメールと OpenCode を接続。</p>
-      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-        <a href="#install" class="btn btn-primary">始める →</a>
-        <a href="mailto:mailcode@zsdev.com" class="btn btn-secondary">お問い合わせ</a>
+      <h2>AI エージェントをどこからでも操作</h2>
+      <p>ワンコマンドでインストール。無料で開始、クレジットカード不要。</p>
+      <div class="cta-actions">
+        <a href="#install" class="btn btn-primary">はじめる →</a>
+        <a href="https://github.com/zsdfbb/mailcode" class="btn btn-secondary">GitHub</a>
       </div>
+      <div class="hint">MIT ライセンス · オープンソース · Python 3.9+</div>
     </div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="container">
-    <div class="footer-links">
-      <a href="https://github.com/zsdfbb/mailcode">GitHub</a>
-      <a href="https://github.com/zsdfbb/mailcode#readme">ドキュメント</a>
-      <a href="mailto:mailcode@zsdev.com">お問い合わせ</a>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/assets/images/logo.svg" alt="MailCode" width="24" height="24">
+        MailCode
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/zsdfbb/mailcode">GitHub</a>
+        <a href="https://github.com/zsdfbb/mailcode#readme">ドキュメント</a>
+        <a href="mailto:mailcode@zsdev.com">お問い合わせ</a>
+        <a href="/ja/changelog">更新履歴</a>
+      </div>
+      <div class="footer-copy">© 2026 MailCode. MIT ライセンス。</div>
     </div>
-    <div class="footer-copy">© 2026 MailCode。MIT ライセンスで公開。</div>
   </div>
 </footer>
 

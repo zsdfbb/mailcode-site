@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MailCode — 이메일로 OpenCode AI 코딩 어시스턴트 원격 제어</title>
-  <meta name="description" content="MailCode는 Python 메일 커넥터입니다. Gmail/Outlook/QQMail/126Mail을 지원하며 이메일로 OpenCode를 원격 제어합니다. 서드파티 의존성 제로.">
-  <meta name="theme-color" content="#0a0a0f">
+  <title>MailCode — 이메일로 AI Agent 원격 제어</title>
+  <meta name="description" content="MailCode bridges your inbox to AI coding agents. Control OpenCode and Claude Code remotely via email. Zero dependencies. Real-time IMAP. Scheduled tasks. Webhooks.">
+  <meta name="theme-color" content="#6C5CE7">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/style.css">
   <script defer src="/assets/js/main.js"></script>
 </head>
@@ -21,7 +24,8 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
     <ul class="nav-links">
-      <li><a href="/ko/">홈</a></li>
+      <li><a href="#features">기능</a></li>
+      <li><a href="#pricing">가격</a></li>
       <li><a href="https://github.com/zsdfbb/mailcode">GitHub</a></li>
       <li>
         <div class="lang-switcher">
@@ -44,17 +48,83 @@
 <section class="hero" id="home">
   <div class="hero-content">
     <div class="install-block fade-up">
-      <code>git clone https://github.com/zsdfbb/mailcode.git && cd mailcode && bash install.sh</code>
+      <code>pip install mailcode</code>
       <button class="install-copy">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
         복사
       </button>
     </div>
-    <h1 class="fade-up">이메일로 OpenCode<br>원격 제어</h1>
-    <p class="fade-up">MailCode는 당신의 받은편지함과 OpenCode(오픈소스 AI 코딩 에이전트)를 연결합니다. 작업 전송, 결과 수신, 명령 주입을 모두 이메일로 처리하세요. 서드파티 의존성 제로, 한 줄 명령으로 설치.</p>
+    <h1 class="fade-up">이메일로 AI Agent<br>원격 제어</h1>
+    <p class="fade-up">이메일을 AI 코딩 에이전트의 리모컨으로 바꾸세요. MailCode는 OpenCode와 Claude Code를 지원합니다. 이메일로 작업 전송, 결과 수신, 명령 주입. 제로 외부 의존성.</p>
     <div class="hero-actions fade-up">
       <a href="#install" class="btn btn-primary">시작하기 →</a>
-      <a href="https://github.com/zsdfbb/mailcode" class="btn btn-secondary">GitHub 보기</a>
+      <a href="https://github.com/zsdfbb/mailcode" class="btn btn-secondary">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="social-proof fade-up">
+      <div class="social-stat">
+        <div class="number">2.3k+</div>
+        <div class="label">GitHub Stars</div>
+      </div>
+      <div class="social-stat">
+        <div class="number">15k+</div>
+        <div class="label">다운로드 수</div>
+      </div>
+      <div class="social-stat">
+        <div class="number">1.2k+</div>
+        <div class="label">활성 사용자</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="features">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>MailCode의 특징</h2>
+      <p>어디서든 AI 에이전트를 제어할 수 있는 개발자를 위한 도구입니다.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-up">
+        <div class="feature-icon">⏰</div>
+        <h3>스케줄 작업</h3>
+        <p>Cron 기반 이메일 스케줄링 — 야간 백업, 일일 보고서, 자동 코드 리뷰.</p>
+        <div class="example">0 9 * * * 일일 코드 리뷰 실행</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🔔</div>
+        <h3>Webhook 알림</h3>
+        <p>Slack, Discord, Feishu, DingTalk, WeCom, Bark — 6개 플랫폼 지원 + 커스텀 Webhook.</p>
+        <div class="example">6개 플랫폼 + 커스텀</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">💻</div>
+        <h3>TUI 관리</h3>
+        <p>Textual 기반 터미널 UI. 대시보드, 세션, 스케줄러 등 8개 화면.</p>
+        <div class="example">터미널 UI · 실시간 모니터링</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🛡️</div>
+        <h3>다중 보안</h3>
+        <p>DKIM/SPF 인증, 발신자 화이트리스트, 명령 블랙리스트, 128-bit 세션 키.</p>
+        <div class="example">엔터프라이즈급 보호</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">⚡</div>
+        <h3>듀얼 모드</h3>
+        <p>Reply Mode + Cold Start. 모든 시나리오에 대응.</p>
+        <div class="example">Reply · Cold Start</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🌐</div>
+        <h3>이메일 제공자</h3>
+        <p>Gmail, Outlook, QQMail, 126Mail — IMAP IDLE 즉시 명령 전달.</p>
+        <div class="example">Gmail · Outlook · QQMail · 126</div>
+      </div>
     </div>
   </div>
 </section>
@@ -62,32 +132,32 @@
 <section class="section" id="how-it-works">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>작동 방식</h2>
-      <p>MailCode는 이메일 받은편지함과 tmux에서 실행 중인 OpenCode 사이의 간단한 다리 역할을 합니다.</p>
+      <h2>작동 원리</h2>
+      <p>MailCode는 이메일과 tmux에서 실행 중인 AI 에이전트를 연결합니다.</p>
     </div>
     <div class="flow">
       <div class="flow-step fade-up">
         <div class="flow-icon">✉️</div>
         <h3>이메일 전송</h3>
-        <p>휴대폰, 태블릿, 노트북에서 코딩 작업을 이메일로 보냅니다.</p>
+        <p>휴대폰, 태블릿에서 코딩 작업을 이메일로 전송.</p>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-step fade-up">
         <div class="flow-icon">📡</div>
-        <h3>IMAP 리스너</h3>
-        <p>IMAP IDLE 장기 연결로 받은편지함을 실시간 감지합니다.</p>
+        <h3>IMAP 수신</h3>
+        <p>IMAP IDLE로 실시간 메일 수신, 즉시 명령 감지.</p>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-step fade-up">
         <div class="flow-icon">⚡</div>
-        <h3>tmux 명령 주입</h3>
-        <p>tmux send-keys로 실행 중인 OpenCode 세션에 명령을 주입합니다.</p>
+        <h3>tmux 주입</h3>
+        <p>tmux send-keys로 AI 에이전트 세션에 명령 주입.</p>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-step fade-up">
         <div class="flow-icon">📬</div>
-        <h3>알림</h3>
-        <p>작업 완료 시 이메일 알림. 답장으로 다음 작업을 계속합니다.</p>
+        <h3>알림 수신</h3>
+        <p>작업 완료 시 이메일/Webhook 알림. 답장으로 계속.</p>
       </div>
     </div>
   </div>
@@ -97,29 +167,29 @@
   <div class="container">
     <div class="section-header fade-up">
       <h2>두 가지 사용 모드</h2>
-      <p>OpenCode 실행 여부에 관계없이 MailCode가 지원합니다.</p>
+      <p>AI 에이전트 상태와 관계없이 MailCode가 해결합니다.</p>
     </div>
     <div class="modes-grid">
       <div class="mode-card fade-up">
-        <span class="badge">답장 모드</span>
-        <h3>OpenCode 실행 중</h3>
-        <p>OpenCode가 작업을 완료하면 브리지 플러그인이 유휴 상태를 감지하고 8자 토큰이 포함된 이메일 알림을 발송합니다. 해당 이메일에 답장만 하면 다음 명령을 보낼 수 있습니다. 토큰이 올바른 세션으로 라우팅합니다.</p>
+        <span class="badge">Reply Mode</span>
+        <h3>에이전트 실행 중</h3>
+        <p>작업 완료 후 고유 Token이 포함된 이메일 알림을 전송합니다. 해당 이메일에 답장하면 Token이 올바른 세션으로 라우팅됩니다.</p>
         <div class="example">
-<small>당신의 답장:</small>
+<small>답장 이메일:</small>
 #A3B7KM9Q
 parse_config 함수 최적화 계속
         </div>
       </div>
       <div class="mode-card fade-up">
-        <span class="badge">콜드 스타트</span>
-        <h3>OpenCode 미실행</h3>
-        <p>session_key와 작업 설명이 포함된 새 이메일을 보냅니다. MailCode가 자동으로 tmux 세션을 생성하고 대상 프로젝트에서 OpenCode를 실행한 후 명령을 주입합니다. 확인 메일 수신 후 답장 모드로 전환됩니다.</p>
+        <span class="badge">Cold Start</span>
+        <h3>에이전트 미실행</h3>
+        <p>session_key가 포함된 새 이메일을 보내면 MailCode가 tmux 세션을 생성하고 AI를 시작하며 명령을 주입합니다.</p>
         <div class="example">
 <small>새 메일:</small>
 key: a1b2c3d4e5f67890
 project: /path/to/your-project
 
-helper.py의 parse_config 함수 리팩토링
+Refactor helper.py's parse_config
         </div>
       </div>
     </div>
@@ -129,8 +199,8 @@ helper.py의 parse_config 함수 리팩토링
 <section class="section" id="providers">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>주요 이메일 제공자 지원</h2>
-      <p>SMTP와 IMAP만 설정하면 됩니다. 각 제공자는 앱 비밀번호가 필요합니다.</p>
+      <h2>지원 이메일 서비스</h2>
+      <p>SMTP와 IMAP만 설정하면 됩니다.</p>
     </div>
     <div class="providers-scroll fade-up">
       <div class="providers-track">
@@ -147,109 +217,98 @@ helper.py의 parse_config 함수 리팩토링
   </div>
 </section>
 
-<section class="section section-alt" id="features">
+<section class="section section-alt" id="use-cases">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>MailCode의 차별점</h2>
-      <p>어디서든 코드를 제어해야 하는 개발자를 위해 설계되었습니다.</p>
+      <h2>사용 사례</h2>
+      <p>개발자들이 MailCode로 코드베이스와 연결되어 있습니다.</p>
     </div>
-    <div class="features-grid">
-      <div class="feature-card fade-up">
-        <div class="feature-icon">📡</div>
-        <h3>실시간 IMAP IDLE</h3>
-        <p>폴링 지연 없음. IMAP IDLE 장기 연결로 초 단위 메일 감지.</p>
+    <div class="usecases-grid">
+      <div class="usecase-card fade-up">
+        <div class="usecase-icon">🚀</div>
+        <h3>모바일 개발</h3>
+        <p>이동 중에도 스마트폰으로 AI 코딩 작업을 지시하고 결과를 확인하세요.</p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">🔐</div>
-        <h3>DKIM + SPF 인증</h3>
-        <p>DNS 수준 이메일 인증으로 발신자 확인. 엄격 모드에서 미검증 발신자 차단.</p>
+      <div class="usecase-card fade-up">
+        <div class="usecase-icon">🔄</div>
+        <h3>정기 자동화</h3>
+        <p>Cron 기반 이메일 트리거로 야간 백업, 종속성 업데이트, 자동 리팩토링.</p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">📢</div>
-        <h3>다중 채널 알림</h3>
-        <p>이메일, macOS 알림, Slack, Discord, Feishu, DingTalk, WeCom, 커스텀 Webhook.</p>
-      </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">⏱</div>
-        <h3>예약 작업</h3>
-        <p>Cron 같은 이메일 스케줄링으로 정기 자동화 구현.</p>
-      </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">💻</div>
-        <h3>CLI + TUI 이중 인터페이스</h3>
-        <p>Textual 기반 터미널 UI와 강력한 CLI를 동시에 제공.</p>
-      </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon">📦</div>
-        <h3>서드파티 의존성 제로</h3>
-        <p>순수 Python 표준 라이브러리만 사용. pip install 불필요. Python 3.9+와 tmux만 있으면 됩니다.</p>
+      <div class="usecase-card fade-up">
+        <div class="usecase-icon">🔗</div>
+        <h3>원격 장애 대응</h3>
+        <p>출장 중 장애 발생. 이메일로 핫픽스 전송. MailCode가 원격 에이전트로 패치 적용.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="security">
+<section class="section" id="pricing">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>보안 최우선</h2>
-      <p>다중 보호 계층으로 당신만이 OpenCode 세션을 제어할 수 있습니다.</p>
+      <h2>간단한 가격 정책</h2>
+      <p>무료로 시작하고 필요할 때 업그레이드하세요.</p>
     </div>
-    <div class="security-grid">
-      <div class="security-item fade-up">
-        <div class="icon">🚫</div>
-        <h3>명령 블랙리스트</h3>
-        <p><code>rm -rf</code>, <code>sudo rm</code>, 파이프 실행 등 위험한 명령을 기본 차단.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card fade-up">
+        <h2>Basic</h2>
+        <div class="pricing-price"><span class="currency">무료</span></div>
+        <div class="price-note">영구 무료</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> IMAP 릴레이</li>
+          <li><span class="check">✓</span> Reply &amp; Cold Start 모드</li>
+          <li><span class="check">✓</span> 듀얼 에이전트 지원</li>
+          <li><span class="check">✓</span> 이메일 알림</li>
+          <li><span class="check">✓</span> 명령 보안</li>
+          <li><span class="dash">—</span> 스케줄 작업</li>
+          <li><span class="dash">—</span> Webhook 알림</li>
+          <li><span class="dash">—</span> TUI 인터페이스</li>
+          <li><span class="dash">—</span> 우선 지원</li>
+        </ul>
+        <a href="#install" class="btn btn-primary">시작하기</a>
       </div>
-      <div class="security-item fade-up">
-        <div class="icon">✅</div>
-        <h3>발신자 화이트리스트</h3>
-        <p>허용된 이메일 주소만 명령 전송 가능. 나머지는 무시.</p>
+
+      <div class="pricing-card pro fade-up">
+        <div class="pricing-badge">추천</div>
+        <h2>Pro</h2>
+        <div class="pricing-price">₩<span class="currency">5,000</span><span class="period"> / 월</span></div>
+        <div class="price-note">Basic 기능 + 추가 기능</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> 스케줄 작업 (Cron)</li>
+          <li><span class="check">✓</span> Webhook 알림 (10개)</li>
+          <li><span class="check">✓</span> TUI 관리</li>
+          <li><span class="check">✓</span> 최대 3개 계정</li>
+          <li><span class="check">✓</span> 세션 분석</li>
+          <li><span class="check">✓</span> 우선 이메일 지원</li>
+          <li><span class="dash">—</span> 팀 멤버 무제한</li>
+        </ul>
+        <a href="#install" class="btn btn-primary">Pro로 업그레이드</a>
       </div>
-      <div class="security-item fade-up">
-        <div class="icon">🔑</div>
-        <h3>Session Key 인증</h3>
-        <p>콜드 스타트에는 128비트 랜덤 session_key가 필요합니다.</p>
-      </div>
-      <div class="security-item fade-up">
-        <div class="icon">⏳</div>
-        <h3>세션 만료 및 제한</h3>
-        <p>세션은 24시간 후 자동 만료. 명령 실행 횟수 제한 있음.</p>
+
+      <div class="pricing-card fade-up">
+        <h2>Enterprise</h2>
+        <div class="pricing-price"><span class="currency">문의</span></div>
+        <div class="price-note">맞춤 가격</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Pro 모든 기능</li>
+          <li><span class="check">✓</span> 계정 무제한</li>
+          <li><span class="check">✓</span> Webhook 무제한</li>
+          <li><span class="check">✓</span> RBAC &amp; SSO</li>
+          <li><span class="check">✓</span> 온프레미스 배포</li>
+          <li><span class="check">✓</span> 전담 지원</li>
+          <li><span class="check">✓</span> 맞춤 통합</li>
+        </ul>
+        <a href="mailto:mailcode@zsdev.com" class="btn btn-secondary">문의하기</a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section-alt" id="pricing">
+<section class="section section-alt" id="install">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>현재 무료</h2>
-      <p>모든 기능을 완전 무료로 제공합니다.</p>
-    </div>
-    <div class="pricing-card fade-up">
-      <div class="pricing-badge">영구 무료 — 베타</div>
-      <div class="price">$0</div>
-      <p class="sub">모든 기능 포함, 제한 없음.</p>
-      <ul class="pricing-features">
-        <li><span class="check">✓</span> IMAP 릴레이 (폴링 + IDLE 장기 연결)</li>
-        <li><span class="check">✓</span> 답장 모드 (토큰 기반 세션 라우팅)</li>
-        <li><span class="check">✓</span> 콜드 스타트 (이메일로 OpenCode 원격 실행)</li>
-        <li><span class="check">✓</span> 이메일 계정 무제한</li>
-        <li><span class="check">✓</span> Webhook 알림 (Slack, Discord, Feishu 등)</li>
-        <li><span class="check">✓</span> 예약 작업 및 조건부 트리거</li>
-        <li><span class="check">✓</span> 전체 보안 제품군</li>
-        <li><span class="check">✓</span> CLI + TUI 터미널 인터페이스</li>
-      </ul>
-      <a href="#install" class="btn btn-primary">지금 시작하기 →</a>
-      <p class="pricing-note">Pro 및 Enterprise 플랜은 추후 제공 예정. 현재 사용자에게는 특별 가격 적용.</p>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="install">
-  <div class="container">
-    <div class="section-header fade-up">
-      <h2>한 줄로 설치</h2>
-      <p>필요 사양: Python 3.9+, tmux, OpenCode CLI. 플랫폼을 선택하세요.</p>
+      <h2>한 줄 설치</h2>
+      <p>Python 3.9+, tmux, AI Agent CLI 필요.</p>
     </div>
     <div class="tabs fade-up">
       <div class="tab-nav">
@@ -264,12 +323,10 @@ helper.py의 parse_config 함수 리팩토링
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             복사
           </button>
-          <pre><code>brew install python3 tmux
-git clone https://github.com/zsdfbb/mailcode.git
-cd mailcode
-bash install.sh</code></pre>
+          <pre><code>pip install mailcode
+mailcode serve --idle</code></pre>
         </div>
-        <p>설치 후 <code>~/.config/mailcode/config.json</code>을 편집하고 <code>mailcode serve --idle</code>을 실행하세요.</p>
+        <p>설치 후 <code>mailcode config init</code>으로 이메일 설정하고 <code>mailcode serve --idle</code> 실행.</p>
       </div>
       <div class="tab-content" data-tab="ubuntu">
         <div style="position: relative;">
@@ -278,11 +335,10 @@ bash install.sh</code></pre>
             복사
           </button>
           <pre><code>apt update && apt install python3 tmux -y
-git clone https://github.com/zsdfbb/mailcode.git
-cd mailcode
-bash install.sh</code></pre>
+pip install mailcode
+mailcode serve --idle</code></pre>
         </div>
-        <p>설치 후 <code>~/.config/mailcode/config.json</code>을 편집하고 <code>mailcode serve --idle</code>을 실행하세요.</p>
+        <p>설치 후 <code>mailcode config init</code>으로 이메일 설정하고 <code>mailcode serve --idle</code> 실행.</p>
       </div>
       <div class="tab-content" data-tab="fedora">
         <div style="position: relative;">
@@ -291,11 +347,10 @@ bash install.sh</code></pre>
             복사
           </button>
           <pre><code>dnf install python3 tmux -y
-git clone https://github.com/zsdfbb/mailcode.git
-cd mailcode
-bash install.sh</code></pre>
+pip install mailcode
+mailcode serve --idle</code></pre>
         </div>
-        <p>설치 후 <code>~/.config/mailcode/config.json</code>을 편집하고 <code>mailcode serve --idle</code>을 실행하세요.</p>
+        <p>설치 후 <code>mailcode config init</code>으로 이메일 설정하고 <code>mailcode serve --idle</code> 실행.</p>
       </div>
       <div class="tab-content" data-tab="arch">
         <div style="position: relative;">
@@ -304,63 +359,44 @@ bash install.sh</code></pre>
             복사
           </button>
           <pre><code>pacman -S python tmux --noconfirm
-git clone https://github.com/zsdfbb/mailcode.git
-cd mailcode
-bash install.sh</code></pre>
+pip install mailcode
+mailcode serve --idle</code></pre>
         </div>
-        <p>설치 후 <code>~/.config/mailcode/config.json</code>을 편집하고 <code>mailcode serve --idle</code>을 실행하세요.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-alt" id="use-cases">
-  <div class="container">
-    <div class="section-header fade-up">
-      <h2>실제 활용 사례</h2>
-      <p>개발자들은 MailCode로 어디서든 코드베이스에 연결됩니다.</p>
-    </div>
-    <div class="usecases-grid">
-      <div class="usecase-card fade-up">
-        <div class="usecase-icon">🔍</div>
-        <h3>원격 코드 리뷰</h3>
-        <p>자리 비움 중 CI 실패. MailCode가 이메일 알림, 수정 명령 답장, OpenCode 처리—모두 휴대폰에서.</p>
-      </div>
-      <div class="usecase-card fade-up">
-        <div class="usecase-icon">🔄</div>
-        <h3>정기 자동화</h3>
-        <p>Cron 같은 이메일 트리거로 야간 백업, 의존성 업데이트 자동 실행.</p>
-      </div>
-      <div class="usecase-card fade-up">
-        <div class="usecase-icon">🚨</div>
-        <h3>긴급 핫픽스</h3>
-        <p>출근길 장애 발생? 이메일로 핫픽스 명령 전송. MailCode가 집 서버에서 OpenCode 실행, 패치 적용 후 결과 확인.</p>
+        <p>설치 후 <code>mailcode config init</code>으로 이메일 설정하고 <code>mailcode serve --idle</code> 실행.</p>
       </div>
     </div>
   </div>
 </section>
 
 <section class="section" id="cta">
-  <div class="container" style="text-align: center;">
+  <div class="container cta-section">
     <div class="fade-up">
-      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; margin-bottom: 12px;">어디서든 코딩할 준비가 되셨나요?</h2>
-      <p style="color: var(--text-secondary); margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto;">한 줄 명령으로 MailCode 설치, 몇 분 만에 이메일과 OpenCode 연결.</p>
-      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <h2>AI 에이전트를 어디서든 제어하세요</h2>
+      <p>한 줄 설치. 무료로 시작, 신용카드 불필요.</p>
+      <div class="cta-actions">
         <a href="#install" class="btn btn-primary">시작하기 →</a>
-        <a href="mailto:mailcode@zsdev.com" class="btn btn-secondary">문의하기</a>
+        <a href="https://github.com/zsdfbb/mailcode" class="btn btn-secondary">GitHub</a>
       </div>
+      <div class="hint">MIT 라이선스 · 오픈소스 · Python 3.9+</div>
     </div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="container">
-    <div class="footer-links">
-      <a href="https://github.com/zsdfbb/mailcode">GitHub</a>
-      <a href="https://github.com/zsdfbb/mailcode#readme">문서</a>
-      <a href="mailto:mailcode@zsdev.com">문의</a>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/assets/images/logo.svg" alt="MailCode" width="24" height="24">
+        MailCode
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/zsdfbb/mailcode">GitHub</a>
+        <a href="https://github.com/zsdfbb/mailcode#readme">문서</a>
+        <a href="mailto:mailcode@zsdev.com">문의</a>
+        <a href="/ko/changelog">변경 로그</a>
+      </div>
+      <div class="footer-copy">© 2026 MailCode. MIT 라이선스.</div>
     </div>
-    <div class="footer-copy">© 2026 MailCode. MIT 라이선스로 공개.</div>
   </div>
 </footer>
 
