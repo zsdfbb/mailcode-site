@@ -3,7 +3,7 @@
 # 用法: curl -fsSL https://mailcode.site/install.sh | bash
 set -euo pipefail
 
-REPO="zsdfbb/mailcode-site"
+REPO="zsdfbb/mailcode"
 INSTALL_DIR="${HOME}/.local/bin"
 LIB_DIR="${HOME}/.local/lib/mailcode"
 CONFIG_DIR="${HOME}/.config/mailcode"
@@ -68,7 +68,7 @@ LATEST=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" \
 
 if [ -z "$LATEST" ]; then
     err "无法获取最新版本信息，请检查网络连接"
-    err "或手动安装: git clone https://github.com/zsdfbb/mailcode && cd MailCode && bash install.sh"
+    err "或手动安装: git clone https://github.com/zsdfbb/mailcode.git"
     exit 1
 fi
 
@@ -85,7 +85,7 @@ trap "rm -rf ${TMP_DIR}" EXIT
 info "下载 ${ARCHIVE_NAME}..."
 curl -fsSL "$DOWNLOAD_URL" -o "${TMP_DIR}/mailcode.tar.gz" || {
     err "下载失败: ${DOWNLOAD_URL}"
-    err "如果架构不匹配，尝试手动安装: git clone https://github.com/zsdfbb/mailcode && cd MailCode && bash install.sh"
+    err "如果架构不匹配，尝试手动安装: git clone https://github.com/zsdfbb/mailcode.git"
     exit 1
 }
 log "下载完成"
@@ -130,7 +130,7 @@ config = {
     'email': {
         'from': '', 'from_name': 'MailCode Remote', 'agent_type': 'opencode',
         'to': '', 'check_interval': 5,
-        'session_expiry_hours': 24, 'max_commands_per_session': 10,
+        'session_expiry_hours': 24,
         'default_project_dir': '~/projects/current'
     },
     'security': {
