@@ -68,7 +68,7 @@ LATEST=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" \
 
 if [ -z "$LATEST" ]; then
     err "无法获取最新版本信息，请检查网络连接"
-    err "或手动安装: pip install mailcode"
+    err "或手动安装: git clone https://github.com/zsdfbb/mailcode && cd MailCode && bash install.sh"
     exit 1
 fi
 
@@ -85,7 +85,7 @@ trap "rm -rf ${TMP_DIR}" EXIT
 info "下载 ${ARCHIVE_NAME}..."
 curl -fsSL "$DOWNLOAD_URL" -o "${TMP_DIR}/mailcode.tar.gz" || {
     err "下载失败: ${DOWNLOAD_URL}"
-    err "如果架构不匹配，尝试手动安装: pip install mailcode"
+    err "如果架构不匹配，尝试手动安装: git clone https://github.com/zsdfbb/mailcode && cd MailCode && bash install.sh"
     exit 1
 }
 log "下载完成"
@@ -123,7 +123,7 @@ if [ ! -f "${CONFIG_DIR}/config.json" ]; then
     info "生成默认配置..."
     mkdir -p "${CONFIG_DIR}"
     python3 -c "
-import json, secrets
+import json
 config = {
     'smtp': {'host': 'smtp.qq.com', 'port': 465, 'secure': True, 'user': '', 'pass': ''},
     'imap': {'host': 'imap.qq.com', 'port': 993, 'secure': True, 'user': '', 'pass': ''},
@@ -131,7 +131,7 @@ config = {
         'from': '', 'from_name': 'MailCode Remote', 'agent_type': 'opencode',
         'to': '', 'check_interval': 5,
         'session_expiry_hours': 24, 'max_commands_per_session': 10,
-        'default_project_dir': ''
+        'default_project_dir': '~/projects/current'
     },
     'security': {
         'allowed_senders': [],
@@ -139,7 +139,12 @@ config = {
             'rm -rf /', 'sudo rm', 'chmod 777',
             'curl.*|.*sh', 'wget.*|.*sh'
         ],
-        'session_key': secrets.token_hex(8)
+        'auth_policy': 'warn',
+        'coldstart_confirm': true
+    },
+    'notification': {
+        'desktop': true,
+        'desktop_sound': ''
     }
 }
 with open('${CONFIG_DIR}/config.json', 'w') as f:
@@ -150,34 +155,11 @@ else
     log "配置已存在: ${CONFIG_DIR}/config.json"
 fi
 
-# ── 8. 读取 session_key ──
-SESSION_KEY=$(python3 -c "
-import json
-with open('${CONFIG_DIR}/config.json', 'r') as f:
-    config = json.load(f)
-key = config.get('security', {}).get('session_key', '')
-print(key)
-")
-
-if [ -z "$SESSION_KEY" ]; then
-    SESSION_KEY=$(python3 -c "
-import json, secrets
-with open('${CONFIG_DIR}/config.json', 'r') as f:
-    config = json.load(f)
-key = secrets.token_hex(8)
-config.setdefault('security', {})['session_key'] = key
-with open('${CONFIG_DIR}/config.json', 'w') as f:
-    json.dump(config, f, ensure_ascii=False, indent=2)
-print(key)
-")
-fi
-
-warn "重要！你的冷启动安全 Key（请记录保存）:"
+# ── 8. 验证冷启动配置 ──
+info "冷启动要求：创建符号链接指向你的项目目录:"
+echo "  ln -sfn /path/to/your/project ~/projects/current"
 echo ""
-echo -e "  ${CYAN}${SESSION_KEY}${NC}"
-echo ""
-info "发送冷启动邮件时，在正文首行写入:"
-echo "  key: ${SESSION_KEY}"
+info "启动完成后，发送新邮件包含 project: <name> 即可触发冷启动流程"
 echo ""
 
 # ── 9. 安装 bridge 插件 ──

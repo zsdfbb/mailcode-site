@@ -1,7 +1,7 @@
 # MailCode 网站设计文档
 
-> 版本: v1.1
-> 更新: 2026-05-11
+> 版本: v1.2
+> 更新: 2026-05-15
 > 状态: ✅ 已实施
 
 ---
@@ -10,7 +10,7 @@
 
 ### 1.1 项目背景
 
-MailCode 是一个 Python 邮件连接器，通过邮件实现对 AI 助手（OpenCode / Claude Code）的远程操控。项目当前版本 v0.2.0，包含定时任务引擎、Webhook 通知、TUI 界面、许可分层等新特性。
+MailCode 是一个 Python 邮件连接器，通过邮件实现对 AI 助手（OpenCode / Claude Code）的远程操控。项目当前版本 v0.2.0，包含定时任务引擎、Webhook 通知、TUI 界面、两步冷启动确认等特性。MIT 开源协议，所有功能免费。
 
 ### 1.2 改造目标
 
@@ -323,7 +323,7 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 │  支持 OpenCode / Claude Code，通过邮件指令执行任务。 │
 │                                                     │
 │  ┌─────────────────────────────────────────────┐   │
-│  │  pip install mailcode           │ Copy     │   │
+│  │  curl -fsSL .../install.sh | bash | Copy   │   │
 │  └─────────────────────────────────────────────┘   │
 │                                                     │
 │  [ 快速开始 ]          [ 查看文档 ]                  │
@@ -335,18 +335,9 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 - 标题: 打字机效果 (可选)
 - 安装命令: 浅紫色背景脉冲
 
-### 5.2 Social Proof
+### 5.2 (已移除 — 社交证明区块)
 
-**布局**: 居中，3 列数据
-
-**元素**:
-```
-┌─────────────────────────────────────────────────────┐
-│                                                     │
-│    ⭐ 2.3k Stars      📥 15k Downloads     👥 1.2k Users │
-│                                                     │
-└─────────────────────────────────────────────────────┘
-```
+原社交证明区块（GitHub Stars / 下载量 / 活跃用户）已移除，改为直接由 Features 区块承接。
 
 ### 5.3 Features (v0.2.0 重点)
 
@@ -400,12 +391,18 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 │  Reply Mode                 │  │  Cold Start Mode            │
 │  回复模式                    │  │  冷启动模式                  │
 ├─────────────────────────────┤  ├─────────────────────────────┤
-│  1. AI 已运行于 tmux        │  │  1. 发送邮件（含密钥）       │
-│  2. AI 完成当前任务         │  │  2. 系统创建 tmux 会话      │
-│  3. 发送结果邮件             │  │  3. 自动启动 OpenCode       │
-│  4. 你回复新指令            │  │  4. 执行邮件中的命令        │
-│  5. 命令注入 tmux 继续       │  │  5. 完成后发送结果邮件      │
+│  1. AI 已运行于 tmux        │  │  1. 发送邮件（含 project:）  │
+│  2. AI 完成当前任务         │  │  2. 系统回复确认邮件         │
+│  3. 发送结果邮件             │  │  3. 你回复 confirm: <code>  │
+│  4. 你回复新指令            │  │  4. 创建 tmux 会话 + 启动   │
+│  5. 命令注入 tmux 继续       │  │  5. 执行命令 + 发送结果     │
 └─────────────────────────────┘  └─────────────────────────────┘
+```
+
+**冷启动限制**:
+- 工作目录必须通过 `~/projects/current` 符号链接指定
+- 确认码有效期 5 分钟
+- 发件人必须匹配白名单
 ```
 
 ### 5.6 Use Cases
@@ -419,24 +416,17 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 | ⏰ 定时任务 | 设置 cron 任务，定时自动执行代码审查 |
 | 🔗 远程协作 | 通过邮件与 AI Agent 交互，跨设备工作 |
 
-### 5.7 Pricing
+### 5.7 Pricing（开源展示）
 
-**布局**: 3 列卡片
+**布局**: 2 列卡片
 
 **元素**:
-| 套餐 | 价格 | 核心功能 |
-|------|------|---------|
-| Basic | 免费 | 邮件 Agent 桥接、IMAP IDLE、双 Agent 支持 |
-| Pro ⭐ | $4.99/月 | 定时任务、10 个 Webhook、TUI 界面、3 个邮箱账户 |
-| Enterprise | 联系 | 无限 Webhook、无限邮箱账户、优先级支持 |
+| 卡片 | 内容 |
+|------|------|
+| 开源免费 (pro 高亮) | MIT 开源，所有功能免费：IMAP、回复/冷启动、双 Agent、定时任务、Webhook、TUI、安全 |
+| 商业支持 | 专属支持、私有化部署、自定义集成、优先功能、SLA |
 
-**对比表** (展开查看):
-| 特性 | Basic | Pro | Enterprise |
-|------|-------|-----|------------|
-| 定时任务 | ❌ | ✅ | ✅ |
-| Webhook 数量 | 1 | 10 | 无限 |
-| TUI 界面 | ❌ | ✅ | ✅ |
-| 多邮箱账户 | ❌ | 3 | 无限 |
+**对比说明**: 无付费墙，自托管完全免费；商业支持按需联系。
 
 ### 5.8 CTA
 
@@ -484,27 +474,21 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 /               → index.html          # 浏览器 JS 检测语言并 302 跳转
 /en/index.html  → 英语版 (主版本)
 /zh/index.html  → 中文版
-/ja/index.html  → 日语版
-/ko/index.html  → 韩语版
-/fr/index.html  → 法语版
-/de/index.html  → 德语版
 ```
 
 **语言跳转逻辑** (`index.html`)：
 ```js
 var lang = navigator.language || navigator.userLanguage || 'en'
 var code = lang.split('-')[0]
-var supported = { en: true, zh: true, ja: true, ko: true, fr: true, de: true }
+var supported = { en: true, zh: true }
 var target = supported[code] ? '/' + code + '/' : '/en/'
 window.location.replace(target)
 ```
 
 ### 6.2 翻译同步规则
 
-1. **以 `en/` 为主版本**，其他语言保持结构一致
-2. 每次修改 `en/` 后，须同步更新其余 5 种语言（同一区块、同一顺序）
-3. 翻译文件为完整 HTML，无单独 Key-Value 文件
-4. 同步 checklist：
+1. **以 `en/` 为主版本**，中文版保持结构一致
+2. 每次修改 `en/` 后，须同步更新 `zh/`
    - [ ] Nav 菜单项
    - [ ] Hero 标题 & 描述
    - [ ] Features 6 卡片
@@ -566,6 +550,7 @@ mailcode-site/                    # GitHub Pages 仓库根目录
 ├── index.html                    # 语言自动检测 → 302 跳转
 ├── design/
 │   └── DESIGN.md                 # 本设计文档
+├── install.sh                    # 远程安装脚本
 ├── assets/
 │   ├── css/
 │   │   └── style.css             # 全局样式 (CSS Variables)
@@ -577,14 +562,6 @@ mailcode-site/                    # GitHub Pages 仓库根目录
 │   └── index.html                # 英语版首页
 ├── zh/
 │   └── index.html                # 中文版首页
-├── ja/
-│   └── index.html                # 日语版首页
-├── ko/
-│   └── index.html                # 韩语版首页
-├── fr/
-│   └── index.html                # 法语版首页
-├── de/
-│   └── index.html                # 德语版首页
 └── .gitignore
 ```
 
@@ -605,9 +582,9 @@ mailcode-site/                    # GitHub Pages 仓库根目录
 
 ### 10.1 功能验收
 
-- [ ] 6 种语言页面均可访问
+- [ ] 2 种语言页面均可访问（en/zh）
 - [ ] Hero 安装命令可复制
-- [ ] Pricing 3 档清晰展示
+- [ ] 开源定价清晰展示
 - [ ] 移动端布局正常
 - [ ] 页面加载 < 2s
 

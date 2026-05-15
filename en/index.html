@@ -34,10 +34,6 @@
           <div class="lang-dropdown">
             <a href="/en/" class="active">English</a>
             <a href="/zh/">中文</a>
-            <a href="/ja/">日本語</a>
-            <a href="/ko/">한국어</a>
-            <a href="/fr/">Français</a>
-            <a href="/de/">Deutsch</a>
           </div>
         </div>
       </li>
@@ -50,7 +46,7 @@
 <section class="hero" id="home">
   <div class="hero-content">
     <div class="install-block fade-up">
-      <code>pip install mailcode</code>
+      <code>curl -fsSL https://mailcode.site/install.sh | bash</code>
       <button class="install-copy">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
         Copy
@@ -65,25 +61,7 @@
   </div>
 </section>
 
-<!-- Social Proof -->
-<section class="section">
-  <div class="container">
-    <div class="social-proof fade-up">
-      <div class="social-stat">
-        <div class="number">2.3k+</div>
-        <div class="label">GitHub Stars</div>
-      </div>
-      <div class="social-stat">
-        <div class="number">15k+</div>
-        <div class="label">Downloads</div>
-      </div>
-      <div class="social-stat">
-        <div class="number">1.2k+</div>
-        <div class="label">Active Users</div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- Features -->
 <section class="section section-alt" id="features">
@@ -114,7 +92,7 @@
       <div class="feature-card fade-up">
         <div class="feature-icon">🛡️</div>
         <h3>Multi-Layer Security</h3>
-        <p>DKIM/SPF authentication, sender whitelist, command blacklist, 128-bit session keys, auto-expiring sessions.</p>
+        <p>DKIM/SPF authentication, sender whitelist, command blacklist, two-phase cold start confirmation, symlink-restricted project directory, auto-expiring sessions.</p>
         <div class="example">Enterprise-grade protection</div>
       </div>
       <div class="feature-card fade-up">
@@ -189,13 +167,21 @@ Continue optimizing the parse_config function
       <div class="mode-card fade-up">
         <span class="badge">Cold Start Mode</span>
         <h3>No Agent Running</h3>
-        <p>Send a new email with your session key and task description. MailCode creates a new tmux session, launches the agent, and injects your command. You receive a confirmation with the new token.</p>
+        <p>Send a new email with your task. MailCode replies with a confirmation code containing project details (path, git branch, command preview). Reply <code>confirm: &lt;code&gt;</code> within 5 minutes to launch the agent. Requires <code>~/projects/current</code> symlink pointing to your project.</p>
         <div class="example">
 <small>Your email (new message):</small>
-key: a1b2c3d4e5f67890
-project: /path/to/your-project
+project: MailCode
 
 Refactor helper.py's parse_config function
+        </div>
+        <div class="example" style="margin-top:8px">
+<small>System replies with:</small>
+Project: MailCode
+Path: /Users/you/projects/MailCode
+Branch: main
+Command: Refactor helper.py's parse_config
+
+Reply confirm: a1b2c3 to execute
         </div>
       </div>
     </div>
@@ -255,57 +241,38 @@ Refactor helper.py's parse_config function
 <section class="section" id="pricing">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>Simple, Transparent Pricing</h2>
-      <p>Start free. Upgrade when you need more power.</p>
+      <h2>Open Source · MIT Licensed</h2>
+      <p>MailCode is fully open source and free to self-host. All features — scheduler, webhooks, TUI, security — are included with no paywalls.</p>
     </div>
     <div class="pricing-grid">
-      <div class="pricing-card fade-up">
-        <h2>Basic</h2>
-        <div class="pricing-price">$<span class="currency">0</span></div>
-        <div class="price-note">Free forever</div>
+      <div class="pricing-card pro fade-up">
+        <div class="pricing-badge">Open Source</div>
+        <h2>Self-Hosted</h2>
+        <div class="pricing-price"><span class="currency">Free</span></div>
+        <div class="price-note">Everything included</div>
         <ul class="pricing-features">
           <li><span class="check">✓</span> IMAP relay (polling + IDLE)</li>
           <li><span class="check">✓</span> Reply &amp; Cold Start modes</li>
-          <li><span class="check">✓</span> Dual agent support</li>
+          <li><span class="check">✓</span> Dual agent support (OpenCode / Claude Code)</li>
+          <li><span class="check">✓</span> Scheduled tasks (cron engine)</li>
+          <li><span class="check">✓</span> Webhook notifications (6 platforms + custom)</li>
+          <li><span class="check">✓</span> TUI management interface (8 screens)</li>
+          <li><span class="check">✓</span> Multi-layer security suite</li>
           <li><span class="check">✓</span> Email notifications</li>
-          <li><span class="check">✓</span> Command security suite</li>
-          <li><span class="dash">—</span> Scheduled tasks</li>
-          <li><span class="dash">—</span> Webhook notifications</li>
-          <li><span class="dash">—</span> TUI interface</li>
-          <li><span class="dash">—</span> Priority support</li>
         </ul>
         <a href="#install" class="btn btn-primary">Get Started</a>
-      </div>
-
-      <div class="pricing-card pro fade-up">
-        <div class="pricing-badge">Recommended</div>
-        <h2>Pro</h2>
-        <div class="pricing-price">$<span class="currency">4</span><span class="period">.99 / month</span></div>
-        <div class="price-note">Everything in Basic, plus:</div>
-        <ul class="pricing-features">
-          <li><span class="check">✓</span> Scheduled tasks (cron)</li>
-          <li><span class="check">✓</span> Webhook notifications (10 sources)</li>
-          <li><span class="check">✓</span> TUI management interface</li>
-          <li><span class="check">✓</span> Up to 3 email accounts</li>
-          <li><span class="check">✓</span> Session analytics</li>
-          <li><span class="check">✓</span> Priority email support</li>
-          <li><span class="dash">—</span> Unlimited team members</li>
-        </ul>
-        <a href="#install" class="btn btn-primary">Upgrade to Pro</a>
       </div>
 
       <div class="pricing-card fade-up">
         <h2>Enterprise</h2>
         <div class="pricing-price"><span class="currency">Contact</span></div>
-        <div class="price-note">Custom pricing</div>
+        <div class="price-note">Custom support &amp; deployment</div>
         <ul class="pricing-features">
-          <li><span class="check">✓</span> Everything in Pro</li>
-          <li><span class="check">✓</span> Unlimited email accounts</li>
-          <li><span class="check">✓</span> Unlimited webhook sources</li>
-          <li><span class="check">✓</span> RBAC &amp; SSO</li>
-          <li><span class="check">✓</span> On-premise deployment</li>
           <li><span class="check">✓</span> Dedicated support</li>
+          <li><span class="check">✓</span> On-premise deployment assistance</li>
           <li><span class="check">✓</span> Custom integrations</li>
+          <li><span class="check">✓</span> Priority feature requests</li>
+          <li><span class="check">✓</span> SLA guarantees</li>
         </ul>
         <a href="mailto:mailcode@zsdev.com" class="btn btn-secondary">Contact Us</a>
       </div>
@@ -333,7 +300,7 @@ Refactor helper.py's parse_config function
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             Copy
           </button>
-          <pre><code>pip install mailcode
+          <pre><code>curl -fsSL https://mailcode.site/install.sh | bash
 mailcode serve --idle</code></pre>
         </div>
         <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve --idle</code>.</p>
@@ -345,7 +312,7 @@ mailcode serve --idle</code></pre>
             Copy
           </button>
           <pre><code>apt update && apt install python3 tmux -y
-pip install mailcode
+curl -fsSL https://mailcode.site/install.sh | bash
 mailcode serve --idle</code></pre>
         </div>
         <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve --idle</code>.</p>
@@ -357,7 +324,7 @@ mailcode serve --idle</code></pre>
             Copy
           </button>
           <pre><code>dnf install python3 tmux -y
-pip install mailcode
+curl -fsSL https://mailcode.site/install.sh | bash
 mailcode serve --idle</code></pre>
         </div>
         <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve --idle</code>.</p>
@@ -369,7 +336,7 @@ mailcode serve --idle</code></pre>
             Copy
           </button>
           <pre><code>pacman -S python tmux --noconfirm
-pip install mailcode
+curl -fsSL https://mailcode.site/install.sh | bash
 mailcode serve --idle</code></pre>
         </div>
         <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve --idle</code>.</p>
@@ -405,7 +372,7 @@ mailcode serve --idle</code></pre>
         <a href="https://github.com/zsdfbb/mailcode">GitHub</a>
         <a href="https://github.com/zsdfbb/mailcode#readme">Docs</a>
         <a href="mailto:mailcode@zsdev.com">Contact</a>
-        <a href="/en/changelog">Changelog</a>
+        <a href="/en/changelog" style="display:none">Changelog</a>
       </div>
       <div class="footer-copy">© 2026 MailCode. Open source under the MIT License.</div>
     </div>

@@ -33,10 +33,6 @@
           <div class="lang-dropdown">
             <a href="/en/">English</a>
             <a href="/zh/" class="active">中文</a>
-            <a href="/ja/">日本語</a>
-            <a href="/ko/">한국어</a>
-            <a href="/fr/">Français</a>
-            <a href="/de/">Deutsch</a>
           </div>
         </div>
       </li>
@@ -48,7 +44,7 @@
 <section class="hero" id="home">
   <div class="hero-content">
     <div class="install-block fade-up">
-      <code>pip install mailcode</code>
+      <code>curl -fsSL https://mailcode.site/install.sh | bash</code>
       <button class="install-copy">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
         复制
@@ -63,24 +59,7 @@
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="social-proof fade-up">
-      <div class="social-stat">
-        <div class="number">2.3k+</div>
-        <div class="label">GitHub Stars</div>
-      </div>
-      <div class="social-stat">
-        <div class="number">15k+</div>
-        <div class="label">下载量</div>
-      </div>
-      <div class="social-stat">
-        <div class="number">1.2k+</div>
-        <div class="label">活跃用户</div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <section class="section section-alt" id="features">
   <div class="container">
@@ -110,7 +89,7 @@
       <div class="feature-card fade-up">
         <div class="feature-icon">🛡️</div>
         <h3>多重安全防护</h3>
-        <p>DKIM/SPF 域名认证、发件人白名单、命令黑名单、128 位 Session Key、会话自动过期。</p>
+        <p>DKIM/SPF 域名认证、发件人白名单、命令黑名单、两步冷启动确认、符号链接目录限制、会话自动过期。</p>
         <div class="example">企业级安全保护</div>
       </div>
       <div class="feature-card fade-up">
@@ -183,13 +162,21 @@
       <div class="mode-card fade-up">
         <span class="badge">冷启动模式</span>
         <h3>Agent 尚未运行</h3>
-        <p>发送一封新邮件，附上 session_key 和任务描述。MailCode 自动创建 tmux 会话，在目标项目中启动 Agent，并注入你的命令。收到确认邮件后即可切换到回复模式继续。</p>
+        <p>发送一封新邮件，正文可含可选 <code>project:</code> 行指定项目。MailCode 回复确认邮件（含项目名、路径、git 分支、命令预览），回复 <code>confirm: &lt;code&gt;</code> 后创建 tmux 会话并启动 Agent。需要 <code>~/projects/current</code> 符号链接指向你的项目目录。</p>
         <div class="example">
 <small>你的邮件（新邮件）：</small>
-key: a1b2c3d4e5f67890
-project: /path/to/your-project
+project: MailCode
 
-重构 helper.py 中的 parse_config 函数
+帮我重构 helper.py 中的 parse_config 函数
+        </div>
+        <div class="example" style="margin-top:8px">
+<small>系统回复确认邮件：</small>
+项目: MailCode
+路径: /Users/you/projects/MailCode
+分支: main
+命令: 重构 helper.py 中的 parse_config 函数
+
+回复 confirm: a1b2c3 确认执行
         </div>
       </div>
     </div>
@@ -246,57 +233,38 @@ project: /path/to/your-project
 <section class="section" id="pricing">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>简单透明的定价</h2>
-      <p>免费开始，按需升级。</p>
+      <h2>开源 · MIT 协议</h2>
+      <p>MailCode 完全开源，自托管免费。所有功能——定时任务、Webhook、TUI、安全防护——完全开放，无付费墙。</p>
     </div>
     <div class="pricing-grid">
-      <div class="pricing-card fade-up">
-        <h2>Basic</h2>
-        <div class="pricing-price">¥<span class="currency">0</span></div>
-        <div class="price-note">永久免费</div>
+      <div class="pricing-card pro fade-up">
+        <div class="pricing-badge">开源免费</div>
+        <h2>自托管</h2>
+        <div class="pricing-price"><span class="currency">免费</span></div>
+        <div class="price-note">全部功能开放</div>
         <ul class="pricing-features">
           <li><span class="check">✓</span> IMAP 中继（轮询 + IDLE）</li>
           <li><span class="check">✓</span> 回复 &amp; 冷启动模式</li>
-          <li><span class="check">✓</span> 双 Agent 支持</li>
+          <li><span class="check">✓</span> 双 Agent 支持（OpenCode / Claude Code）</li>
+          <li><span class="check">✓</span> 定时任务引擎（Cron）</li>
+          <li><span class="check">✓</span> Webhook 多渠道通知（6 平台 + 自定义）</li>
+          <li><span class="check">✓</span> TUI 管理界面（8 大屏幕）</li>
+          <li><span class="check">✓</span> 多重安全防护体系</li>
           <li><span class="check">✓</span> 邮件通知</li>
-          <li><span class="check">✓</span> 命令安全套件</li>
-          <li><span class="dash">—</span> 定时任务</li>
-          <li><span class="dash">—</span> Webhook 通知</li>
-          <li><span class="dash">—</span> TUI 管理界面</li>
-          <li><span class="dash">—</span> 优先技术支持</li>
         </ul>
         <a href="#install" class="btn btn-primary">开始使用</a>
       </div>
 
-      <div class="pricing-card pro fade-up">
-        <div class="pricing-badge">推荐</div>
-        <h2>Pro</h2>
-        <div class="pricing-price">¥<span class="currency">29</span><span class="period"> / 月</span></div>
-        <div class="price-note">包含 Basic 全部功能，另加：</div>
-        <ul class="pricing-features">
-          <li><span class="check">✓</span> 定时任务（Cron 表达式）</li>
-          <li><span class="check">✓</span> Webhook 通知（10 个来源）</li>
-          <li><span class="check">✓</span> TUI 管理界面</li>
-          <li><span class="check">✓</span> 最多 3 个邮箱账户</li>
-          <li><span class="check">✓</span> 会话数据分析</li>
-          <li><span class="check">✓</span> 优先邮件支持</li>
-          <li><span class="dash">—</span> 无限团队成员</li>
-        </ul>
-        <a href="#install" class="btn btn-primary">升级 Pro</a>
-      </div>
-
       <div class="pricing-card fade-up">
-        <h2>Enterprise</h2>
-        <div class="pricing-price"><span class="currency">联系</span></div>
-        <div class="price-note">定制方案</div>
+        <h2>商业支持</h2>
+        <div class="pricing-price"><span class="currency">联系我们</span></div>
+        <div class="price-note">定制支持与部署</div>
         <ul class="pricing-features">
-          <li><span class="check">✓</span> 包含 Pro 全部功能</li>
-          <li><span class="check">✓</span> 不限邮箱账户</li>
-          <li><span class="check">✓</span> 不限 Webhook 来源</li>
-          <li><span class="check">✓</span> RBAC 权限 &amp; SSO</li>
-          <li><span class="check">✓</span> 私有化部署</li>
           <li><span class="check">✓</span> 专属技术支持</li>
+          <li><span class="check">✓</span> 私有化部署协助</li>
           <li><span class="check">✓</span> 自定义集成</li>
+          <li><span class="check">✓</span> 优先功能需求</li>
+          <li><span class="check">✓</span> SLA 保障</li>
         </ul>
         <a href="mailto:mailcode@zsdev.com" class="btn btn-secondary">联系我们</a>
       </div>
@@ -323,7 +291,7 @@ project: /path/to/your-project
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             复制
           </button>
-          <pre><code>pip install mailcode
+          <pre><code>curl -fsSL https://mailcode.site/install.sh | bash
 mailcode serve --idle</code></pre>
         </div>
         <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve --idle</code>。</p>
@@ -335,7 +303,7 @@ mailcode serve --idle</code></pre>
             复制
           </button>
           <pre><code>apt update && apt install python3 tmux -y
-pip install mailcode
+curl -fsSL https://mailcode.site/install.sh | bash
 mailcode serve --idle</code></pre>
         </div>
         <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve --idle</code>。</p>
@@ -347,19 +315,19 @@ mailcode serve --idle</code></pre>
             复制
           </button>
           <pre><code>dnf install python3 tmux -y
-pip install mailcode
+curl -fsSL https://mailcode.site/install.sh | bash
 mailcode serve --idle</code></pre>
         </div>
         <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve --idle</code>。</p>
       </div>
       <div class="tab-content" data-tab="arch">
-        <div style="position: relative;">
+        <div style="position:relative;">
           <button class="copy-btn">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             复制
           </button>
           <pre><code>pacman -S python tmux --noconfirm
-pip install mailcode
+curl -fsSL https://mailcode.site/install.sh | bash
 mailcode serve --idle</code></pre>
         </div>
         <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve --idle</code>。</p>
@@ -393,7 +361,7 @@ mailcode serve --idle</code></pre>
         <a href="https://github.com/zsdfbb/mailcode">GitHub</a>
         <a href="https://github.com/zsdfbb/mailcode#readme">文档</a>
         <a href="mailto:mailcode@zsdev.com">联系我们</a>
-        <a href="/zh/changelog">更新日志</a>
+        <a href="/zh/changelog" style="display:none">更新日志</a>
       </div>
       <div class="footer-copy">© 2026 MailCode。基于 MIT 协议开源。</div>
     </div>
