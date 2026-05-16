@@ -166,7 +166,7 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 | How It Works | `#how-it-works` | 4 步流程图 |
 | Dual Mode | `#dual-mode` | Reply vs Cold Start 对比 |
 | Use Cases | `#use-cases` | 3 场景卡片 |
-| Pricing | `#pricing` | 3 档定价 |
+| Pricing | `#pricing` | 开源展示 |
 | CTA | `#cta` | 最终行动召唤 |
 | Footer | `#footer` | 链接 + 社交 + 版权 |
 
@@ -257,25 +257,7 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 **状态**:
 - Default / Copied (显示 "Copied!" 2s)
 
-### 4.6 PricingCard
-
-**变体**:
-- `basic`: 白色边框
-- `pro`: 紫色边框 + 推荐标签 (高亮)
-- `enterprise`: 白色边框
-
-**结构**:
-```html
-<div class="pricing-card pro">
-  <div class="pricing-badge">推荐</div>
-  <h2>Pro</h2>
-  <div class="pricing-price">$<span class="currency">4</span><span class="period">.99 / 月</span></div>
-  <ul class="pricing-features">...</ul>
-  <a href="#install" class="btn btn-primary">升级</a>
-</div>
-```
-
-### 4.7 FeatureCard
+### 4.6 FeatureCard
 
 **样式**:
 - 白色背景
@@ -426,15 +408,14 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 
 ### 5.7 Pricing（开源展示）
 
-**布局**: 2 列卡片
+**布局**: 单列居中
 
 **元素**:
 | 卡片 | 内容 |
 |------|------|
-| 开源免费 (pro 高亮) | MIT 开源，所有功能免费：IMAP、回复/冷启动、双 Agent、定时任务、Webhook、TUI、安全 |
-| 商业支持 | 专属支持、私有化部署、自定义集成、优先功能、SLA |
+| MIT 开源 | 完全免费，所有功能可用：IMAP、回复/冷启动、双 Agent、定时任务、Webhook、TUI、安全 |
 
-**对比说明**: 无付费墙，自托管完全免费；商业支持按需联系。
+**说明**: 无付费墙，无商业版——完全 MIT 开源，任何人可自由使用、修改、分发。
 
 ### 5.8 CTA
 
@@ -503,7 +484,7 @@ window.location.replace(target)
    - [ ] How It Works 4 步骤
    - [ ] Dual Mode 2 卡片
    - [ ] Use Cases 3 场景
-   - [ ] Pricing 3 档
+    - [ ] Pricing 开源展示
    - [ ] CTA
    - [ ] Footer
 
