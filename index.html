@@ -24,11 +24,7 @@
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
   <script>
-    var lang = navigator.language || navigator.userLanguage || 'en'
-    var code = lang.split('-')[0]
-    var supported = { en: true, zh: true }
-    var target = supported[code] ? '/' + code + '/' : '/en/'
-    window.location.replace(target)
+    window.location.replace('/en/')
   </script>
 </head>
 <body>
