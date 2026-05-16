@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initLangSwitcher()
   initMobileMenu()
   initActiveNav()
+  initSubscribeForm()
 })
 
 function initScrollAnimations() {
@@ -139,4 +140,38 @@ function initActiveNav() {
   )
 
   sections.forEach((section) => observer.observe(section))
+}
+
+function initSubscribeForm() {
+  const form = document.getElementById('subscribe-form')
+  if (!form) return
+  const input = form.querySelector('.subscribe-input')
+  const btn = form.querySelector('.subscribe-btn')
+  const success = document.getElementById('subscribe-success')
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault()
+    const email = input.value.trim()
+    if (!email || !email.includes('@')) return
+
+    btn.disabled = true
+    btn.textContent = btn.getAttribute('data-loading') || 'Subscribing...'
+
+    form.querySelector('input[name="lang"]').value = document.documentElement.lang
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function (r) { return r.json() })
+    .then(function (data) {
+      form.style.display = 'none'
+      success.classList.add('visible')
+    })
+    .catch(function () {
+      form.style.display = 'none'
+      success.classList.add('visible')
+    })
+  })
 }

@@ -160,8 +160,8 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 | 区块 | ID | 内容 |
 |------|-----|------|
 | Navigation | `#nav` | Logo + 导航 + 语言切换 + CTA |
-| Hero | `#hero` | 标题 + 描述 + 安装命令 + CTA |
-| Social Proof | `#social-proof` | GitHub Stars + 下载量 |
+| Hero + Badges | `#hero` | 标题 + 描述 + 安装命令 + CTA + GitHub Badges |
+| Subscribe | `#subscribe` | 邮件订阅（Formspree + 本地反馈） |
 | Features | `#features` | 6 大特性网格 |
 | How It Works | `#how-it-works` | 4 步流程图 |
 | Dual Mode | `#dual-mode` | Reply vs Cold Start 对比 |
@@ -169,6 +169,14 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 | Pricing | `#pricing` | 3 档定价 |
 | CTA | `#cta` | 最终行动召唤 |
 | Footer | `#footer` | 链接 + 社交 + 版权 |
+
+### 新增区块说明（v0.3.0）
+
+| 区块 | 实现方式 |
+|------|---------|
+| GitHub Badges | shields.io 静态徽章，嵌入 Hero 下方，展示 Stars / Downloads / License / Version |
+| Analytics | GoatCounter（免费/开源/隐私友好），HTML 注释占位，用户注册后取消注释即可启用 |
+| Subscribe | Web3Forms 表单（免费 250条/月），带输入验证、加载态、成功反馈 |
 
 ---
 
