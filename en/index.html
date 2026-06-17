@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MailCode — Control AI Agents via Email</title>
-  <meta name="description" content="MailCode bridges your inbox to OpenCode and Claude Code. Control AI coding agents remotely through email. Zero dependencies. Real-time IMAP. Scheduled tasks. Webhook notifications.">
+  <meta name="description" content="MailCode bridges your inbox to OpenCode and Claude Code. Control AI coding agents remotely through email. Zero dependencies. Real-time IMAP. Scheduled tasks. Terminal chat. Session persistence.">
   <meta name="theme-color" content="#6C5CE7">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,28 +108,28 @@
         <div class="example">0 9 * * * Run daily code review</div>
       </div>
       <div class="feature-card fade-up">
-        <div class="feature-icon">🔔</div>
-        <h3>Webhook Notifications</h3>
-        <p>Slack, Discord, Feishu, DingTalk, WeCom, Bark (iOS) — choose your channel. Custom webhooks supported.</p>
-        <div class="example">6 platforms + custom webhooks</div>
+        <div class="feature-icon">💬</div>
+        <h3>Terminal Chat</h3>
+        <p>Start an interactive REPL with the AI directly from your terminal — no email needed. Resume any existing session created by the relay, or start a fresh conversation.</p>
+        <div class="example">mailcode chat --session-id &lt;id&gt;</div>
       </div>
       <div class="feature-card fade-up">
-        <div class="feature-icon">💻</div>
-        <h3>TUI Management</h3>
-        <p>Full terminal UI (Textual) with 8 screens: dashboard, sessions, scheduler, channels, config, health, logs, license.</p>
-        <div class="example">Terminal UI · Real-time monitoring</div>
+        <div class="feature-icon">📁</div>
+        <h3>Session Persistence</h3>
+        <p>Conversations stored as individual files on disk. Resume across serve and chat modes, or pick up where you left off after a restart. Sessions auto-expire based on configurable TTL.</p>
+        <div class="example">mailcode session list</div>
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon">🛡️</div>
         <h3>Multi-Layer Security</h3>
-        <p>DKIM/SPF authentication, sender whitelist, command blacklist, two-phase cold start confirmation, symlink-restricted project directory, auto-expiring sessions.</p>
+        <p>DKIM/SPF authentication, sender whitelist, command blacklist, and auto-expiring sessions. Every incoming email is verified before execution.</p>
         <div class="example">Enterprise-grade protection</div>
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon">⚡</div>
         <h3>Dual Mode</h3>
-        <p>Reply Mode for active sessions + Cold Start to launch agents remotely. Covers every scenario.</p>
-        <div class="example">Reply · Cold Start</div>
+        <p>Session mode for persistent multi-turn conversations + stateless mode for one-shot commands. Sticky working directory in session mode.</p>
+        <div class="example">Session · Stateless</div>
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon">🌐</div>
@@ -146,7 +146,7 @@
   <div class="container">
     <div class="section-header fade-up">
       <h2>How It Works</h2>
-      <p>MailCode creates a simple bridge between your email inbox and AI agents running in tmux.</p>
+      <p>MailCode creates a simple bridge between your email inbox and AI coding agents.</p>
     </div>
     <div class="flow">
       <div class="flow-step fade-up">
@@ -163,14 +163,14 @@
       <div class="flow-arrow">→</div>
       <div class="flow-step fade-up">
         <div class="flow-icon">⚡</div>
-        <h3>tmux Injection</h3>
-        <p>Commands are injected into your running AI agent's tmux session via send-keys.</p>
+        <h3>AI Processing</h3>
+        <p>Commands are forwarded to a <code>claude -p</code> subprocess. The AI works on your task and streams the response back.</p>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-step fade-up">
         <div class="flow-icon">📬</div>
         <h3>Get Notified</h3>
-        <p>Task completes? You receive an email or webhook notification. Reply to continue the loop.</p>
+        <p>Task completes? You receive an email with the AI's response. Reply to continue the conversation.</p>
       </div>
     </div>
   </div>
@@ -181,37 +181,30 @@
   <div class="container">
     <div class="section-header fade-up">
       <h2>Two Ways to Use It</h2>
-      <p>Whether your AI agent is already running or not, MailCode has you covered.</p>
+      <p>Choose between multi-turn conversations or one-shot commands — whatever fits your workflow.</p>
     </div>
     <div class="modes-grid">
       <div class="mode-card fade-up">
-        <span class="badge">Reply Mode</span>
-        <h3>Agent Already Running</h3>
-        <p>The bridge plugin detects idle state and sends you an email notification with a unique token. Simply reply with your next instruction — the token routes your command to the right session.</p>
+        <span class="badge">Session Mode</span>
+        <h3>Multi-Turn Conversations</h3>
+        <p>MailCode groups emails by subject into persistent sessions. Reply to the same email thread and the AI remembers context — no need to repeat yourself. The working directory (cwd) is <strong>sticky</strong>: set it once in your first email and all follow-ups reuse it. Sessions survive restarts and can be resumed via <code>mailcode chat --session-id &lt;id&gt;</code>.</p>
         <div class="example">
-<small>Your email reply:</small>
-#A3B7KM9Q
-Continue optimizing the parse_config function
+<small>Your first email:</small>
+cwd: ~/Projects/my-app
+Add error handling to the login module
+
+<small>Reply to continue — AI remembers context:</small>
+Now add unit tests for those error cases
         </div>
       </div>
       <div class="mode-card fade-up">
-        <span class="badge">Cold Start Mode</span>
-        <h3>No Agent Running</h3>
-        <p>Send a new email with your task. MailCode replies with a confirmation code containing project details (path, git branch, command preview). Reply <code>confirm: &lt;code&gt;</code> within 5 minutes to launch the agent. Requires <code>~/projects/current</code> symlink pointing to your project.</p>
+        <span class="badge">Stateless Mode</span>
+        <h3>One-Shot Commands</h3>
+        <p>Set <code>session.enabled = false</code> in your config for simple single-reply mode. Each email is processed independently — no conversation history is carried over. The cwd directive is parsed fresh every time. Perfect for scheduled tasks or quick one-off queries.</p>
         <div class="example">
-<small>Your email (new message):</small>
-project: MailCode
-
-Refactor helper.py's parse_config function
-        </div>
-        <div class="example" style="margin-top:8px">
-<small>System replies with:</small>
-Project: MailCode
-Path: /Users/you/projects/MailCode
-Branch: main
-Command: Refactor helper.py's parse_config
-
-Reply confirm: a1b2c3 to execute
+<small>Your email — no context carried over:</small>
+cwd: ~/Projects/my-app
+Run the test suite and report failures
         </div>
       </div>
     </div>
@@ -283,7 +276,7 @@ Reply confirm: a1b2c3 to execute
   <div class="container">
     <div class="section-header fade-up">
       <h2>Install in One Command</h2>
-      <p>Requires Python 3.9+, tmux, and an AI agent CLI. Choose your platform.</p>
+      <p>Requires Python 3.9+ and an AI agent CLI (Claude Code or OpenCode). Choose your platform.</p>
     </div>
     <div class="tabs fade-up">
       <div class="tab-nav">
@@ -299,9 +292,9 @@ Reply confirm: a1b2c3 to execute
             Copy
           </button>
           <pre><code>curl -fsSL https://mailcode.site/install.sh | bash
-mailcode serve --idle</code></pre>
+mailcode serve</code></pre>
         </div>
-        <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve --idle</code>.</p>
+        <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve</code>.</p>
       </div>
       <div class="tab-content" data-tab="ubuntu">
         <div style="position: relative;">
@@ -309,11 +302,10 @@ mailcode serve --idle</code></pre>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             Copy
           </button>
-          <pre><code>apt update && apt install python3 tmux -y
-curl -fsSL https://mailcode.site/install.sh | bash
-mailcode serve --idle</code></pre>
+          <pre><code>curl -fsSL https://mailcode.site/install.sh | bash
+mailcode serve</code></pre>
         </div>
-        <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve --idle</code>.</p>
+        <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve</code>.</p>
       </div>
       <div class="tab-content" data-tab="fedora">
         <div style="position: relative;">
@@ -321,11 +313,11 @@ mailcode serve --idle</code></pre>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             Copy
           </button>
-          <pre><code>dnf install python3 tmux -y
+          <pre><code>dnf install python3 -y
 curl -fsSL https://mailcode.site/install.sh | bash
-mailcode serve --idle</code></pre>
+mailcode serve</code></pre>
         </div>
-        <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve --idle</code>.</p>
+        <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve</code>.</p>
       </div>
       <div class="tab-content" data-tab="arch">
         <div style="position: relative;">
@@ -333,11 +325,11 @@ mailcode serve --idle</code></pre>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             Copy
           </button>
-          <pre><code>pacman -S python tmux --noconfirm
+          <pre><code>pacman -S python --noconfirm
 curl -fsSL https://mailcode.site/install.sh | bash
-mailcode serve --idle</code></pre>
+mailcode serve</code></pre>
         </div>
-        <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve --idle</code>.</p>
+        <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve</code>.</p>
       </div>
     </div>
   </div>

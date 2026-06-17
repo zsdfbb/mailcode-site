@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MailCode — 通过邮件远程操控 AI Agent</title>
-  <meta name="description" content="MailCode 将你的邮箱与 AI 编程助手打通。通过邮件远程操控 OpenCode 和 Claude Code。零第三方依赖，实时 IMAP 监听，支持定时任务、Webhook 通知。">
+  <meta name="description" content="MailCode 将你的邮箱与 AI 编程助手打通。通过邮件远程操控 OpenCode 和 Claude Code。零第三方依赖，实时 IMAP 监听，支持定时任务、终端聊天、会话持久化。">
   <meta name="theme-color" content="#6C5CE7">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,28 +105,28 @@
         <div class="example">0 9 * * * 执行每日代码审查</div>
       </div>
       <div class="feature-card fade-up">
-        <div class="feature-icon">🔔</div>
-        <h3>多渠道通知</h3>
-        <p>Slack、Discord、飞书、钉钉、企业微信、Bark——6 大平台全覆盖，支持自定义 Webhook。</p>
-        <div class="example">6 大平台 + 自定义 Webhook</div>
+        <div class="feature-icon">💬</div>
+        <h3>终端聊天</h3>
+        <p>直接从终端启动交互式 REPL 与 AI 对话——无需经过邮件。可恢复中继服务中创建的任何会话，或开启全新对话。</p>
+        <div class="example">mailcode chat --session-id &lt;id&gt;</div>
       </div>
       <div class="feature-card fade-up">
-        <div class="feature-icon">💻</div>
-        <h3>TUI 管理界面</h3>
-        <p>基于 Textual 的全功能终端 UI，8 大管理屏幕：仪表盘、会话、调度器、频道、配置、健康、日志、许可。</p>
-        <div class="example">终端界面 · 实时监控</div>
+        <div class="feature-icon">📁</div>
+        <h3>会话持久化</h3>
+        <p>每个对话以独立文件持久化存储，可在 serve 和 chat 模式间无缝切换。重启后自动恢复，支持按 TTL 自动清理过期会话。</p>
+        <div class="example">mailcode session list</div>
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon">🛡️</div>
         <h3>多重安全防护</h3>
-        <p>DKIM/SPF 域名认证、发件人白名单、命令黑名单、两步冷启动确认、符号链接目录限制、会话自动过期。</p>
+        <p>DKIM/SPF 域名认证、发件人白名单、命令黑名单、会话自动过期——每封邮件执行前均经过验证。</p>
         <div class="example">企业级安全保护</div>
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon">⚡</div>
         <h3>双模式运行</h3>
-        <p>回复模式（已有会话） + 冷启动模式（远程启动 Agent），覆盖所有使用场景。</p>
-        <div class="example">回复模式 · 冷启动</div>
+        <p>Session 模式支持持久化多轮对话 + 无状态模式支持单次命令。Session 模式下工作目录（cwd）可粘性保持。</p>
+        <div class="example">Session · 无状态</div>
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon">🌐</div>
@@ -142,7 +142,7 @@
   <div class="container">
     <div class="section-header fade-up">
       <h2>工作原理</h2>
-      <p>MailCode 在邮箱收件箱与 tmux 中的 AI Agent 之间搭建了一座简单的桥梁。</p>
+      <p>MailCode 在邮箱收件箱与 AI Agent 之间搭建了一座简单的桥梁。</p>
     </div>
     <div class="flow">
       <div class="flow-step fade-up">
@@ -159,14 +159,14 @@
       <div class="flow-arrow">→</div>
       <div class="flow-step fade-up">
         <div class="flow-icon">⚡</div>
-        <h3>tmux 命令注入</h3>
-        <p>命令通过 tmux send-keys 注入到正在运行的 AI Agent 会话中。</p>
+        <h3>AI 处理</h3>
+        <p>命令转发给 <code>claude -p</code> 子进程处理。AI 执行任务并流式返回结果。</p>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-step fade-up">
         <div class="flow-icon">📬</div>
         <h3>结果通知</h3>
-        <p>任务完成后自动发送通知邮件或 Webhook，回复即可继续操作。</p>
+        <p>任务完成后自动发送回复邮件。回复该邮件即可继续对话。</p>
       </div>
     </div>
   </div>
@@ -176,37 +176,30 @@
   <div class="container">
     <div class="section-header fade-up">
       <h2>两种使用模式</h2>
-      <p>无论 AI Agent 是否已在运行，MailCode 都有应对方案。</p>
+      <p>选择多轮对话或单次命令——总有一种适合你的工作流。</p>
     </div>
     <div class="modes-grid">
       <div class="mode-card fade-up">
-        <span class="badge">回复模式</span>
-        <h3>Agent 已在运行</h3>
-        <p>Agent 完成任务后进入空闲状态，桥接插件自动发送邮件通知（含唯一 Token）。直接回复该邮件即可输入下一条指令——Token 将命令路由到正确的会话，通过 tmux send-keys 注入执行。</p>
+        <span class="badge">Session 模式</span>
+        <h3>多轮对话</h3>
+        <p>MailCode 按邮件主题将对话分组为持久化 Session。回复同一邮件主题，AI 会记住上下文——无需重复描述。工作目录（cwd）具有<strong>粘性</strong>：首封邮件设置后，后续回复自动沿用。Session 在重启后仍可恢复，也可通过 <code>mailcode chat --session-id &lt;id&gt;</code> 在终端中继续。</p>
         <div class="example">
-<small>你的邮件回复：</small>
-#A3B7KM9Q
-继续优化 parse_config 函数
+<small>首封邮件：</small>
+cwd: ~/Projects/my-app
+给登录模块添加错误处理
+
+<small>继续回复——AI 记得上下文：</small>
+再为这些错误处理写单元测试
         </div>
       </div>
       <div class="mode-card fade-up">
-        <span class="badge">冷启动模式</span>
-        <h3>Agent 尚未运行</h3>
-        <p>发送一封新邮件，正文可含可选 <code>project:</code> 行指定项目。MailCode 回复确认邮件（含项目名、路径、git 分支、命令预览），回复 <code>confirm: &lt;code&gt;</code> 后创建 tmux 会话并启动 Agent。需要 <code>~/projects/current</code> 符号链接指向你的项目目录。</p>
+        <span class="badge">无状态模式</span>
+        <h3>单次命令</h3>
+        <p>在配置中设置 <code>session.enabled = false</code> 即可切换为简单的一问一答模式。每封邮件独立处理，不保留对话历史。cwd 指令每次重新解析。适合定时任务或一次性查询。</p>
         <div class="example">
-<small>你的邮件（新邮件）：</small>
-project: MailCode
-
-帮我重构 helper.py 中的 parse_config 函数
-        </div>
-        <div class="example" style="margin-top:8px">
-<small>系统回复确认邮件：</small>
-项目: MailCode
-路径: /Users/you/projects/MailCode
-分支: main
-命令: 重构 helper.py 中的 parse_config 函数
-
-回复 confirm: a1b2c3 确认执行
+<small>邮件——不保留上下文：</small>
+cwd: ~/Projects/my-app
+运行测试套件并报告失败项
         </div>
       </div>
     </div>
@@ -274,7 +267,7 @@ project: MailCode
   <div class="container">
     <div class="section-header fade-up">
       <h2>一条命令完成安装</h2>
-      <p>需要 Python 3.9+、tmux 和一个 AI Agent CLI。选择你的平台。</p>
+      <p>需要 Python 3.9+ 和一个 AI Agent CLI（Claude Code 或 OpenCode）。选择你的平台。</p>
     </div>
     <div class="tabs fade-up">
       <div class="tab-nav">
@@ -290,9 +283,9 @@ project: MailCode
             复制
           </button>
           <pre><code>curl -fsSL https://mailcode.site/install.sh | bash
-mailcode serve --idle</code></pre>
+mailcode serve</code></pre>
         </div>
-        <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve --idle</code>。</p>
+        <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve</code>。</p>
       </div>
       <div class="tab-content" data-tab="ubuntu">
         <div style="position: relative;">
@@ -300,11 +293,10 @@ mailcode serve --idle</code></pre>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             复制
           </button>
-          <pre><code>apt update && apt install python3 tmux -y
-curl -fsSL https://mailcode.site/install.sh | bash
-mailcode serve --idle</code></pre>
+          <pre><code>curl -fsSL https://mailcode.site/install.sh | bash
+mailcode serve</code></pre>
         </div>
-        <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve --idle</code>。</p>
+        <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve</code>。</p>
       </div>
       <div class="tab-content" data-tab="fedora">
         <div style="position: relative;">
@@ -312,11 +304,11 @@ mailcode serve --idle</code></pre>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             复制
           </button>
-          <pre><code>dnf install python3 tmux -y
+          <pre><code>dnf install python3 -y
 curl -fsSL https://mailcode.site/install.sh | bash
-mailcode serve --idle</code></pre>
+mailcode serve</code></pre>
         </div>
-        <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve --idle</code>。</p>
+        <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve</code>。</p>
       </div>
       <div class="tab-content" data-tab="arch">
         <div style="position:relative;">
@@ -324,11 +316,11 @@ mailcode serve --idle</code></pre>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             复制
           </button>
-          <pre><code>pacman -S python tmux --noconfirm
+          <pre><code>pacman -S python --noconfirm
 curl -fsSL https://mailcode.site/install.sh | bash
-mailcode serve --idle</code></pre>
+mailcode serve</code></pre>
         </div>
-        <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve --idle</code>。</p>
+        <p>安装后运行 <code>mailcode config init</code> 配置邮箱，然后启动中继服务 <code>mailcode serve</code>。</p>
       </div>
     </div>
   </div>

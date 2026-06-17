@@ -5,7 +5,6 @@ set -euo pipefail
 
 REPO="zsdfbb/mailcode"
 INSTALL_DIR="${HOME}/.local/bin"
-LIB_DIR="${HOME}/.local/lib/mailcode"
 CONFIG_DIR="${HOME}/.config/mailcode"
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; CYAN='\033[0;36m'; NC='\033[0m'
@@ -19,227 +18,143 @@ echo "  MailCode 远程安装"
 echo "  ================="
 echo ""
 
-# ── 1. 检查环境 ──
-if ! command -v python3 &>/dev/null; then
+# ── 1. 检查 Python ──
+PYTHON=""
+for cmd in python3 python; do
+    if command -v "$cmd" &>/dev/null; then
+        PYTHON=$(command -v "$cmd")
+        break
+    fi
+done
+
+if [ -z "$PYTHON" ]; then
     err "未找到 python3，请先安装 Python 3.9+"
+    err "  macOS: brew install python"
+    err "  Ubuntu/Debian: sudo apt install python3"
+    err "  Fedora: sudo dnf install python3"
+    err "  Arch: sudo pacman -S python"
     exit 1
 fi
-log "Python3: $(command -v python3)"
 
-if ! command -v tmux &>/dev/null; then
-    warn "未找到 tmux，请先安装"
-    warn "  macOS: brew install tmux"
-    warn "  Ubuntu/Debian: sudo apt install tmux"
-    warn "  Fedora: sudo dnf install tmux"
-    warn "  Arch: sudo pacman -S tmux"
-fi
+PY_VER=$("$PYTHON" --version 2>&1 | grep -oP '\d+\.\d+' || echo "0")
+PY_MAJOR=${PY_VER%.*}
+PY_MINOR=${PY_VER#*.}
 
-if ! command -v curl &>/dev/null; then
-    err "未找到 curl"
+if [ "$PY_MAJOR" -lt 3 ] || { [ "$PY_MAJOR" -eq 3 ] && [ "$PY_MINOR" -lt 9 ]; }; then
+    err "需要 Python 3.9+，当前版本: $("$PYTHON" --version 2>&1)"
     exit 1
 fi
-log "curl: $(command -v curl)"
 
-# ── 2. 检测平台 ──
-OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-ARCH=$(uname -m)
+log "Python: $("$PYTHON" --version 2>&1)"
 
-case "$ARCH" in
-    x86_64|amd64) ARCH="x86_64" ;;
-    aarch64)      ARCH="arm64" ;;
-esac
+# ── 2. 检查 pip ──
+PIP=""
+for cmd in pip3 pip; do
+    if command -v "$cmd" &>/dev/null; then
+        PIP=$(command -v "$cmd")
+        break
+    fi
+done
 
-case "$OS" in
-    darwin|linux) ;;
-    *)
-        err "不支持的操作系统: ${OS}（仅支持 macOS 和 Linux）"
+if [ -z "$PIP" ]; then
+    # 尝试用 python -m pip
+    if "$PYTHON" -m pip --version &>/dev/null; then
+        PIP="$PYTHON -m pip"
+    else
+        err "未找到 pip，请先安装: $PYTHON -m ensurepip --upgrade"
         exit 1
-        ;;
-esac
-
-log "平台: ${OS}/${ARCH}"
-
-# ── 3. 获取最新版本 ──
-info "查询最新版本..."
-LATEST=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" \
-    | grep '"tag_name"' \
-    | sed 's/.*"tag_name": "\(.*\)",/\1/' \
-    || true)
-
-if [ -z "$LATEST" ]; then
-    err "无法获取最新版本信息，请检查网络连接"
-    err "或手动安装: git clone https://github.com/zsdfbb/mailcode.git"
-    exit 1
+    fi
 fi
 
-VERSION="${LATEST#v}"
-log "最新版本: ${LATEST}"
+log "pip: $("$PIP" --version 2>&1 | head -1)"
 
-# ── 4. 下载二进制 ──
-ARCHIVE_NAME="mailcode-${VERSION}-${OS}-${ARCH}.tar.gz"
-DOWNLOAD_URL="https://github.com/${REPO}/releases/download/${LATEST}/${ARCHIVE_NAME}"
+# ── 3. 安装 mailcode ──
+info "安装 mailcode..."
 
-TMP_DIR=$(mktemp -d)
-trap "rm -rf ${TMP_DIR}" EXIT
-
-info "下载 ${ARCHIVE_NAME}..."
-curl -fsSL "$DOWNLOAD_URL" -o "${TMP_DIR}/mailcode.tar.gz" || {
-    err "下载失败: ${DOWNLOAD_URL}"
-    err "如果架构不匹配，尝试手动安装: git clone https://github.com/zsdfbb/mailcode.git"
-    exit 1
-}
-log "下载完成"
-
-# ── 5. 解压 ──
-info "解压..."
-EXTRACT_DIR="${TMP_DIR}/extract"
-mkdir -p "$EXTRACT_DIR"
-tar -xzf "${TMP_DIR}/mailcode.tar.gz" -C "$EXTRACT_DIR"
-
-STAGING_DIR=$(ls -d "${EXTRACT_DIR}"/*/ 2>/dev/null | head -1)
-if [ -z "$STAGING_DIR" ]; then
-    err "解压后未找到内容"
-    exit 1
+# 检测是否需要 --break-system-packages (PEP 668)
+PIP_FLAGS=""
+IN_VENV=$("$PYTHON" -c "import sys; print(int(sys.prefix != sys.base_prefix))" 2>/dev/null || echo "0")
+if [ "$IN_VENV" = "0" ]; then
+    PIP_FLAGS="--user"
+    # 检测是否 PEP 668 环境需要 --break-system-packages
+    if "$PIP" install --dry-run --user mailcode 2>&1 | grep -q "externally-managed-environment"; then
+        PIP_FLAGS="--user --break-system-packages"
+    fi
 fi
-BINARY_DIR="${STAGING_DIR}/mailcode.dist"
-BINARY="${BINARY_DIR}/mailcode"
 
-if [ ! -f "$BINARY" ]; then
-    err "未找到二进制文件: ${BINARY}"
-    exit 1
+if ! $PIP install $PIP_FLAGS mailcode 2>&1; then
+    warn "pip 安装失败，尝试从源码安装..."
+    TMP_DIR=$(mktemp -d)
+    trap "rm -rf ${TMP_DIR}" EXIT
+
+    if ! command -v git &>/dev/null; then
+        err "未找到 git，请手动安装: https://github.com/${REPO}"
+        exit 1
+    fi
+
+    info "克隆仓库..."
+    git clone --depth 1 "https://github.com/${REPO}.git" "${TMP_DIR}/mailcode" 2>&1 | tail -1
+    cd "${TMP_DIR}/mailcode"
+    bash install.sh
+    exit 0
 fi
-log "解压完成"
 
-# ── 6. 安装二进制到 ~/.local ──
-info "安装二进制..."
-mkdir -p "${INSTALL_DIR}" "${LIB_DIR}"
-rm -rf "${LIB_DIR}" "${INSTALL_DIR}/mailcode"
-cp -r "$BINARY_DIR" "${LIB_DIR}"
-ln -sf "${LIB_DIR}/mailcode" "${INSTALL_DIR}/mailcode"
-log "已安装: ${INSTALL_DIR}/mailcode"
+log "mailcode 已安装"
 
-# ── 7. 生成配置 ──
-if [ ! -f "${CONFIG_DIR}/config.json" ]; then
-    info "生成默认配置..."
-    mkdir -p "${CONFIG_DIR}"
-    python3 -c "
-import json
-config = {
-    'smtp': {'host': 'smtp.qq.com', 'port': 465, 'secure': True, 'user': '', 'pass': ''},
-    'imap': {'host': 'imap.qq.com', 'port': 993, 'secure': True, 'user': '', 'pass': ''},
-    'email': {
-        'from': '', 'from_name': 'MailCode Remote', 'agent_type': 'opencode',
-        'to': '', 'check_interval': 5,
-        'session_expiry_hours': 24,
-        'default_project_dir': '~/projects/current'
-    },
-    'security': {
-        'allowed_senders': [],
-        'blocked_commands': [
-            'rm -rf /', 'sudo rm', 'chmod 777',
-            'curl.*|.*sh', 'wget.*|.*sh'
-        ],
-        'auth_policy': 'warn',
-        'coldstart_confirm': true
-    },
-    'notification': {
-        'desktop': true,
-        'desktop_sound': ''
-    }
-}
-with open('${CONFIG_DIR}/config.json', 'w') as f:
-    json.dump(config, f, ensure_ascii=False, indent=2)
-"
-    log "已创建配置: ${CONFIG_DIR}/config.json"
+# ── 4. 确保在 PATH 中 ──
+INSTALLED_PATH=$(command -v mailcode 2>/dev/null || true)
+if [ -z "$INSTALLED_PATH" ]; then
+    USER_BIN=$("$PYTHON" -c "import site; print(site.USER_BASE + '/bin')" 2>/dev/null || echo "${HOME}/.local/bin")
+    mkdir -p "$USER_BIN"
+    INSTALLED_PATH="${USER_BIN}/mailcode"
+
+    if [ -f "${USER_BIN}/mailcode" ]; then
+        log "mailcode 位于: ${USER_BIN}/mailcode"
+    fi
+
+    if ! echo "${PATH}" | tr ':' '\n' | grep -qxF "${USER_BIN}"; then
+        warn "${USER_BIN} 不在 PATH 中，请添加到 shell rc 文件:"
+        echo "  export PATH=\"\${HOME}/.local/bin:\${PATH}\""
+        INSTALLED_PATH=""
+    fi
+fi
+
+# ── 5. 检查 Claude Code ──
+if command -v claude &>/dev/null; then
+    log "Claude Code 已安装: $(claude --version 2>/dev/null || echo '版本未知')"
 else
-    log "配置已存在: ${CONFIG_DIR}/config.json"
-fi
-
-# ── 8. 验证冷启动配置 ──
-info "冷启动要求：创建符号链接指向你的项目目录:"
-echo "  ln -sfn /path/to/your/project ~/projects/current"
-echo ""
-info "启动完成后，发送新邮件包含 project: <name> 即可触发冷启动流程"
-echo ""
-
-# ── 9. 安装 bridge 插件 ──
-# 从解压包中复制 mailcode-bridge.js
-BRIDGE_SRC="${STAGING_DIR}/mailcode-bridge.js"
-if [ -f "$BRIDGE_SRC" ]; then
-    OC_PLUGINS_DIR="${HOME}/.config/opencode/plugins"
-    mkdir -p "$OC_PLUGINS_DIR"
-    cp -f "$BRIDGE_SRC" "${OC_PLUGINS_DIR}/mailcode-bridge.js"
-    log "OpenCode bridge 已安装到 ~/.config/opencode/plugins/"
-else
-    warn "未找到 mailcode-bridge.js，跳过 OpenCode 插件安装"
-fi
-
-# Claude Code hooks（内联写入）
-CLAUDE_DIR="${HOME}/.claude"
-CLAUDE_SETTINGS="${CLAUDE_DIR}/settings.json"
-CLAUDE_HOOK=$(cat << 'EOF'
-{
-  "hooks": {
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "mailcode notify completed"
-          }
-        ]
-      }
-    ]
-  }
-}
-EOF
-)
-
-mkdir -p "${CLAUDE_DIR}"
-if [ -f "$CLAUDE_SETTINGS" ]; then
-    python3 -c "
-import json
-with open('${CLAUDE_SETTINGS}', 'r') as f:
-    s = json.load(f)
-hooks = s.setdefault('hooks', {})
-stop = hooks.setdefault('Stop', [])
-entry = {'matcher': '', 'hooks': [{'type': 'command', 'command': 'mailcode notify completed'}]}
-if entry not in stop:
-    stop.append(entry)
-with open('${CLAUDE_SETTINGS}', 'w') as f:
-    json.dump(s, f, ensure_ascii=False, indent=2)
-"
-    log "Claude Code hooks 已合并到 ~/.claude/settings.json"
-else
-    echo "$CLAUDE_HOOK" > "$CLAUDE_SETTINGS"
-    log "Claude Code hooks 已安装到 ~/.claude/settings.json"
-fi
-
-# ── 10. 检查 PATH ──
-if ! echo "${PATH}" | tr ':' '\n' | grep -qxF "${INSTALL_DIR}"; then
+    warn "未检测到 Claude Code"
+    echo "  MailCode 需要 Claude Code 来处理邮件命令。请访问以下地址安装:"
+    echo "  https://docs.anthropic.com/en/docs/claude-code/overview"
     echo ""
-    warn "~/.local/bin 不在 PATH 中，请添加到 ~/.zshrc 或 ~/.bashrc:"
-    echo "  export PATH=\"\${HOME}/.local/bin:\${PATH}\""
-fi
-
-# ── 11. 验证 ──
-echo ""
-if "${INSTALL_DIR}/mailcode" --version &>/dev/null; then
-    log "安装验证通过: $("${INSTALL_DIR}/mailcode" --version)"
-else
-    warn "安装验证异常，请检查 ${INSTALL_DIR}/mailcode"
 fi
 
 echo ""
+
+# ── 6. 初始化配置 ──
+if command -v mailcode &>/dev/null; then
+    mailcode config init 2>/dev/null || true
+    log "配置已就绪"
+    warn "请编辑配置填入邮箱和密码:"
+    echo "  ${CONFIG_DIR}/config.json"
+elif [ -n "$INSTALLED_PATH" ] && [ -f "$INSTALLED_PATH" ]; then
+    "$PYTHON" -m mailcode.cli config init 2>/dev/null || true
+    log "配置已就绪"
+fi
+
+echo ""
+
+# ── 7. 完成 ──
 log "安装完成！"
 echo ""
-info "启动中继:"
-echo "  mailcode serve --idle"
+info "下一步:"
+echo "  1. 编辑配置: 编辑 ${CONFIG_DIR}/config.json"
+echo "  2. 配置你的 Bot 邮箱和授权码"
+echo "  3. 校验配置: mailcode config validate"
+echo "  4. 自检连通性: mailcode health"
+echo "  5. 启动中继:  mailcode serve"
 echo ""
-info "启动 TUI:"
-echo "  mailcode tui"
-echo ""
-info "查看帮助:"
+info "更多帮助:"
 echo "  mailcode --help"
+echo "  https://github.com/${REPO}#readme"
 echo ""
