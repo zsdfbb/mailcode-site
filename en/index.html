@@ -259,60 +259,20 @@ Run the test suite and report failures
   <div class="container">
     <div class="section-header fade-up">
       <h2>Install in One Command</h2>
-      <p>Requires Python 3.9+ and an AI agent CLI (Claude Code or OpenCode). Choose your platform.</p>
+      <p>Requires Python 3.9+ and an AI agent CLI (Claude Code or OpenCode).</p>
     </div>
     <div class="tabs fade-up">
-      <div class="tab-nav">
-        <button class="tab-btn active" data-tab="mac">macOS</button>
-        <button class="tab-btn" data-tab="ubuntu">Ubuntu / Debian</button>
-        <button class="tab-btn" data-tab="fedora">Fedora</button>
-        <button class="tab-btn" data-tab="arch">Arch Linux</button>
-      </div>
-      <div class="tab-content active" data-tab="mac">
+      <div class="tab-content active" style="display:block; border-radius:var(--radius-lg); border:1px solid var(--border);">
         <div style="position: relative;">
           <button class="copy-btn">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             Copy
           </button>
-          <pre><code>curl -fsSL https://mailcode.site/install.sh | bash
+          <pre><code>pip install mailcode
+mailcode config init
 mailcode serve</code></pre>
         </div>
-        <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve</code>.</p>
-      </div>
-      <div class="tab-content" data-tab="ubuntu">
-        <div style="position: relative;">
-          <button class="copy-btn">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-            Copy
-          </button>
-          <pre><code>curl -fsSL https://mailcode.site/install.sh | bash
-mailcode serve</code></pre>
-        </div>
-        <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve</code>.</p>
-      </div>
-      <div class="tab-content" data-tab="fedora">
-        <div style="position: relative;">
-          <button class="copy-btn">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-            Copy
-          </button>
-          <pre><code>dnf install python3 -y
-curl -fsSL https://mailcode.site/install.sh | bash
-mailcode serve</code></pre>
-        </div>
-        <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve</code>.</p>
-      </div>
-      <div class="tab-content" data-tab="arch">
-        <div style="position: relative;">
-          <button class="copy-btn">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-            Copy
-          </button>
-          <pre><code>pacman -S python --noconfirm
-curl -fsSL https://mailcode.site/install.sh | bash
-mailcode serve</code></pre>
-        </div>
-        <p>After installation, run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve</code>.</p>
+        <p>Run <code>mailcode config init</code> to configure your email credentials, then start the relay with <code>mailcode serve</code>.</p>
       </div>
     </div>
   </div>

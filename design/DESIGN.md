@@ -237,16 +237,7 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 <span class="badge">Reply Mode</span>
 ```
 
-### 4.4 Tabs
-
-用于平台安装命令切换 (macOS / Ubuntu / Fedora / Arch)
-
-**样式**:
-- 下划线指示器
-- 选中状态：紫色文字 + 紫色下划线
-- 未选中：灰色文字
-
-### 4.5 CodeBlock
+### 4.4 CodeBlock
 
 **样式**:
 - 深色背景 (#1E293B)
@@ -257,7 +248,7 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 **状态**:
 - Default / Copied (显示 "Copied!" 2s)
 
-### 4.6 FeatureCard
+### 4.5 FeatureCard
 
 **样式**:
 - 白色背景
@@ -265,7 +256,7 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 - 标题 + 描述
 - hover 时上浮 + 边框变紫
 
-### 4.8 Navigation
+### 4.6 Navigation
 
 **样式**:
 - 固定顶部
@@ -278,7 +269,7 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 - Desktop: 完整显示
 - Mobile: 汉堡菜单
 
-### 4.9 Footer
+### 4.7 Footer
 
 **结构**:
 - 左侧: Logo + 一句话描述
@@ -286,7 +277,7 @@ shadow-primary: 0 4px 14px 0 rgb(108 92 231 / 0.4);
 - 右侧: 社交图标
 - 底部: 版权信息
 
-### 4.10 LanguageSwitcher
+### 4.8 LanguageSwitcher
 
 **样式**:
 - 下拉菜单
